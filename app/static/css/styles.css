@@ -1,0 +1,40 @@
+:root{
+--rosa:#f22b56;
+--violeta:#9b4b54;
+--cian:#4d8f81;
+--turquesa:#78bd91;
+--beige:#ebebab;
+}
+
+html{
+    font-size:65%;
+}
+
+body{
+    font-size: 16px;
+}
+
+
+
+nav{
+    background-color: var(--cian);
+    font-family: monospace;
+    font-weight: lighter;
+}
+
+.navbar-brand{
+    font-family: fantasy;
+    font-weight: normal;
+    font-size: 2rem;
+}
+
+.card-body{
+    border-color: var(--rosa);
+    border-radius: 1rem;
+    border: var(--rosa);
+}
+
+.tipoIngreso{
+    text-decoration: black;
+    
+}

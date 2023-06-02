@@ -1,0 +1,29 @@
+{% extends './templateNavBar.html' %}
+{% block content %}
+<div class="container text-center">
+    <div class="row">
+      <div class="col">
+        Column
+      </div>
+      <div class="col">
+        
+        <div class="card">
+            <h5 class="card-header">BIENVENIDO A CONTABILIAPP</h5>
+            <div class="card-body">
+              <h5 class="card-title">INGRESA EL MONTO INCIAL PARA COMENZAR</h5>
+              <p class="card-text">$ <span><input type="" placeholder="0.00"></span></p>
+              <div class="tipoIngreso">
+               <select name="" id="">
+                   <option value="Seleccione un tipo de ingreso..." selected disabled>Seleccione un tipo de ingreso...</option>
+                   <option value="Cheque">Cheque</option>
+                   <option value="Efectivo">Efectivo</option>
+                 </select>
+              </div>
+            </div>
+            <a href="{{url_for('vwInsertDatos')}}" class="btn btn-primary">INICIAR</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+{% endblock %}
