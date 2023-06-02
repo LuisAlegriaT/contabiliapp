@@ -4,15 +4,13 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    titles={
-        'title':'ContabiliApp',
-        'indexText':'Bienvenido a CONTABILIAPP'
-    }
-    return render_template('indexTemplate.html',titles=titles)
+   return render_template('index.html')
 
-@app.route('/holaMundo')
-def hola_mundo():
-    return "Hola Mundo"
+@app.route('/vw_insertDatos')
+def vwInsertDatos():
+    return render_template('vwInsertDatos.html')
+
+
 
 if __name__ == '__main__':
     app.add_url_rule('/',view_func=index)
