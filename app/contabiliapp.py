@@ -11,6 +11,16 @@ def vwInsertDatos():
     return render_template('vwInsertDatos.html')
 
 
+@app.route('/vw_esquemaT')
+def vwEsquemaT():
+    return render_template('vwEsquemaT.html')
+
+
+
+
+
+
+
 
 if __name__ == '__main__':
     app.add_url_rule('/',view_func=index)
