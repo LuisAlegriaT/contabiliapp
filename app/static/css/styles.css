@@ -22,19 +22,8 @@ nav{
     font-weight: lighter;
 }
 
-.navbar-brand{
-    font-family: fantasy;
-    font-weight: normal;
-    font-size: 2rem;
-}
-
-.card-body{
-    border-color: var(--rosa);
-    border-radius: 1rem;
-    border: var(--rosa);
-}
-
-.tipoIngreso{
-    text-decoration: black;
-    
+.row{
+    display: felx;
+    justify-content: center;
+    align-items: center;
 }
