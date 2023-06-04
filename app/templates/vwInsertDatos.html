@@ -1,13 +1,15 @@
-{% extends 'templateNavBar.html' %}
-{% block content %}
+{%extends 'templateNavBar.html'%}
+{%block content%}
 
 <div class="container text-center">
     <div class="row">
       <div class="col">
-
+        {%for cons in consulta%}
         <div class="card">
-            <h5 class="card-header">NOMBRE BALANCE</h5>
-            <div class="card-body">
+          
+            <h5 class="card-header">BALANCE: {{cons.1}}</h5>
+          
+              <div class="card-body">
               <h5 class="card-title"></h5>
               <p>
                 MONTO: $
@@ -39,9 +41,10 @@
 
               </div>
             </div>
-            <a href="{{url_for('vwInsertDatos')}}" class="btn btn-primary">REGISTRAR MONTO</a>
+            <a href="" class="btn btn-primary">REGISTRAR MONTO</a>
             <a href="{{url_for('vwEsquemaT')}}" class="btn btn-primary">GENERAR ESQUEMA T</a>
         </div>
+        {%endfor%}
 
       </div>
     </div>
@@ -84,4 +87,4 @@
       </div>
   </div>
 
-{% endblock content %}
+{% endblock %}
