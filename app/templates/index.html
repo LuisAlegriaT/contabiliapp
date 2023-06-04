@@ -10,11 +10,14 @@
         <div class="card">
             <h5 class="card-header">BIENVENIDO A CONTABILIAPP</h5>
             <div class="card-body">
-              <h5 class="card-title">INGRESA EL NOMBRE DEL NUEVO BALANCE</h5>
-              <input type="" placeholder="BALANCE MES...">
+              <form action="/vw_insertFormatos" method="POST" class="row g-3 col-12">
+                <h5 class="card-title">INGRESA EL NOMBRE DEL NUEVO BALANCE</h5>
+                <input name="formato" type="" placeholder="BALANCE MES...">
+                <button class="btn btn-primary">COMENZAR</button>
+              </form>
               </div>
             </div>
-            <a href="{{url_for('vwInsertDatos')}}" class="btn btn-primary">COMENZAR</a>
+            
         </div>
 
       </div>
