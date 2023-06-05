@@ -16,81 +16,65 @@
     <div class="row g-3">
       <div class="col-6">
         
-
+        
+          
         <table class="table">
             <thead>
               <tr>
-                <th scope="col" colspan="4">BANCOS</th>
+                <th scope="col" colspan="4"> {{consulta1}}</th>
               </tr>
             </thead>
+           
             <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">HABER</th>
-                  <th scope="col">DEBER</th>
+                  <th scope="col">ABONO</th>
+                  <th scope="col">CARGO</th>
                   <th scope="col">#</th>
                 </tr>
               </thead>
-            <tbody>
+            
+          
+          <tbody>
+            
+            
+            
+            
+              {%for cursor1 in cursor1%}
               <tr>
-                <th scope="row">1</th>
-                <td><span>$</span>100,000</td>
-                <td><span>$</span>1,000</td>
-                <th scope="col">4</th>
-              </tr>
-              <tr>
-                <th scope="row">7</th>
-                <td><span>$</span>400</td>
-                <td><span>$</span>3,000</td>
-                <th scope="col">6</th>
-              </tr>
-              <tr>
-                <th scope="row">12</th>
-                <td><span>$</span>4,400</td>
-                <td><span>$</span>3,000</td>
-                <th scope="col">10</th>
-              </tr>
-            </tbody>
-          </table>
-
-
-      </div>
-      <div class="col-6">
-
-
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col" colspan="4">EQUIPO OFICINA</th>
-              </tr>
-            </thead>
-            <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">HABER</th>
-                  <th scope="col">DEBER</th>
-                  <th scope="col">#</th>
-                </tr>
-              </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td><span>$</span>10,000</td>
-                <td><span>$</span> </td>
-                <th scope="col"> </th>
-              </tr>
-              
-              <tr>
-                <th scope="row">9</th>
-                <td><span>$</span>1,400</td>
-                <td><span>$</span></td>
+                <th scope="col">{{cursor1.1}}</th>
+                <th scope="col">{{cursor1.0}}</th>
+                <th scope="col"></th>
                 <th scope="col"></th>
               </tr>
-            </tbody>
+              {%endfor%}
+            
+              {%for cursor2 in cursor2%}
+              <tr>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col">{{cursor2.0}}</th>
+                <th scope="col">{{cursor2.1}}</th>
+
+              </tr>
+              {%endfor%}
+                
+
+                
+            
+            
+            
+          </tbody>            
           </table>
 
-
+          
       </div>
+
+          
+      
+
+
+      
       <div class="col-6">
         <div class="p-3">Custom column padding</div>
       </div>
