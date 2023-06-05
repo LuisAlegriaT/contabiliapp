@@ -64,28 +64,14 @@ def vwInsertData(idFormato):
 
 @app.route('/vw_esquemaT/<idFormato>')
 def vwEsquemaT(idFormato):
-    cursor1=mysql.connection.cursor()
-    cursor1.execute('SELECT datos.id_dato, datos.monto, conceptos.tipoConcepto, datos.concepto_id,datos.deberHaber_id FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s ',[idFormato])
+    dataEsquemasT=mysql.connection.cursor()
+    dataEsquemasT.execute('SELECT datos.id_dato, datos.monto, datos.deberHaber_id, conceptos.id_Concepto FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s',[idFormato])
     mysql.connection.commit()
-    cursores = cursor1.fetchone()
+    conjuntoDatos = dataEsquemasT.fetchall()
+    print(conjuntoDatos)
     
+    return render_template('vwEsquemaT.html',conjuntoDatos=conjuntoDatos)
 
-    if cursores[2] == 'Bancos':
-        Bancos = cursores[2]
-        cursores1=mysql.connection.cursor()
-        cursores1.execute('SELECT datos.monto, datos.id_dato FROM datos INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE conceptos.tipoConcepto=%s AND datos.deberHaber_id = %s AND datos.formato_id = %s',[Bancos, 1, idFormato])
-        mysql.connection.commit()  
-        cursor1 = cursores1.fetchall()
-
-        cursores2=mysql.connection.cursor()
-        cursores2.execute('SELECT datos.monto, datos.id_dato FROM datos INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE conceptos.tipoConcepto=%s AND datos.deberHaber_id = %s AND datos.formato_id = %s',[Bancos,2, idFormato])
-        mysql.connection.commit()  
-        cursor2 = cursores2.fetchall()
-   
-    
-    
-    return render_template('vwEsquemaT.html', consulta1=Bancos, cursor1=cursor1, cursor2=cursor2, )
-
-if __name__ == '__main__':
+if __name__ == '_main_':
     app.add_url_rule('/',view_func=index)
     app.run(debug=True, port=5005)

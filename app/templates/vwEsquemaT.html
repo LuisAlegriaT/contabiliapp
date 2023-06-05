@@ -13,75 +13,103 @@
 </div>
 
 <div class="container text-center border-primary">
+
+
     <div class="row g-3">
       <div class="col-6">
-        
-        
-          
         <table class="table">
             <thead>
               <tr>
-                <th scope="col" colspan="4"> {{consulta1}}</th>
+                <th scope="col" colspan="4">BANCOS</th>
               </tr>
             </thead>
-           
+            
             <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">ABONO</th>
-                  <th scope="col">CARGO</th>
-                  <th scope="col">#</th>
-                </tr>
-              </thead>
-            
-          
-          <tbody>
-            
-            
-            
-            
-              {%for cursor1 in cursor1%}
               <tr>
-                <th scope="col">{{cursor1.1}}</th>
-                <th scope="col">{{cursor1.0}}</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
               </tr>
-              {%endfor%}
-            
-              {%for cursor2 in cursor2%}
-              <tr>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col">{{cursor2.0}}</th>
-                <th scope="col">{{cursor2.1}}</th>
-
-              </tr>
-              {%endfor%}
-                
-
-                
-            
-            
-            
-          </tbody>            
+            </thead>
+            <tbody>
+                {%for registro in conjuntoDatos%}
+                  {% if registro[3]==2 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+                    {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+                      <tr>
+                        <th scope="col">{{registro[0]}}</th>
+                        <th scope="col">$ {{registro[1]}}</th>
+                        <th scope="col">$ 00.00</th>
+                        <th scope="col">##</th>
+                      </tr>
+                    {% else %}
+                      <tr>
+                        <th scope="col">##</th>
+                        <th scope="col">$ 00.00</th>
+                        <th scope="col">{{registro[1]}}</th>
+                        <th scope="col">{{registro[0]}}</th>
+                      </tr>
+                    {% endif %}
+                  {% endif %}
+                {%endfor%}
+              </tbody>
           </table>
-
-          
       </div>
 
-          
+
+      <div class="col-6">
+        <div class="p-3">
+          AQUI VA OTRA TABLA 1
+        </div>
+      </div>
+
+
+      <div class="col-6">
+        <div class="p-3">
+          AQUI VA OTRA TABLA 2
+        </div>
+      </div>
+
+
+      <div class="col-6">
+        <div class="p-3">
+          AQUI VA OTRA TABLA 3 
+        </div>
+      </div>
+
+
+      <div class="col-6">
+        <div class="p-3">
+          AQUI VA OTRA TABLA 4
+        </div>
+      </div>
+
+
+      <div class="col-6">
+        <div class="p-3">
+          AQUI VA OTRA TABLA 5
+        </div>
+      </div>
+
+
+      <div class="col-6">
+        <div class="p-3">
+          AQUI VA OTRA TABLA 6 
+        </div>
+      </div>
       
-
-
       
       <div class="col-6">
-        <div class="p-3">Custom column padding</div>
+        <div class="p-3">
+          AQUI VA OTRA TABLA 7
+        </div>
       </div>
-      <div class="col-6">
-        <div class="p-3">Custom column padding</div>
-      </div>
+
+
+
+
+
+
     </div>
 </div>
-
-{% endblock %}
+{% endblock %}
