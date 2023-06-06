@@ -65,16 +65,17 @@ def vwInsertData(idFormato):
 @app.route('/vw_esquemaT/<idFormato>')
 def vwEsquemaT(idFormato):
     dataEsquemasT=mysql.connection.cursor()
-    dataEsquemasT.execute('SELECT datos.id_dato, datos.monto, datos.deberHaber_id, conceptos.id_Concepto,formatos.id_formato  FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s',[idFormato])
+    dataEsquemasT.execute('SELECT datos.id_dato, datos.monto, datos.deberHaber_id, conceptos.id_Concepto FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s',[idFormato])
     mysql.connection.commit()
     conjuntoDatos = dataEsquemasT.fetchall()
-    print(conjuntoDatos)
+    
     cur=mysql.connection.cursor()
     cur.execute('SELECT * FROM formatos WHERE id_formato= %s',[idFormato])
     consulta = cur.fetchone()
     cur=mysql.connection.cursor()
 
-    datos2=((1,2))
+    datos2=conjuntoDatos[2]
+    print(datos2)
     
     return render_template('vwEsquemaT.html',conjuntoDatos=conjuntoDatos, consulta=consulta,datos2=datos2)
 
