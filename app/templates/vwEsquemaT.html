@@ -4,23 +4,25 @@
     <div class="row">
       <div class="col">
 
-        <input type="" value="FORMATO NO. 003" disabled>
+        <input type="" value="FORMATO NO. {{consulta.0}}" disabled>
       </div>
       <div class="col">
-        <input type="text" value="BALANCE ENERO 2023" disabled  >
+        <input type="text" value="BALANCE {{consulta.1}}" disabled  >
       </div>
     </div>
 </div>
 
-<div class="container text-center border-primary">
 
+
+<div class="container text-center border-primary">
+    
 
     <div class="row g-3">
       <div class="col-6">
         <table class="table">
             <thead>
               <tr>
-                <th scope="col" colspan="4">BANCOS</th>
+                <th scope="col" colspan="4">CAJA</th>
               </tr>
             </thead>
             
@@ -34,11 +36,11 @@
             </thead>
             <tbody>
                 {%for registro in conjuntoDatos%}
-                  {% if registro[3]==2 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+                  {% if registro[3]==1 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
                     {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
                       <tr>
                         <th scope="col">{{registro[0]}}</th>
-                        <th scope="col">$ {{registro[1]}}</th>
+                        <th scope="col"  >$ {{registro[1]}}</th>
                         <th scope="col">$ 00.00</th>
                         <th scope="col">##</th>
                       </tr>
@@ -46,70 +48,1494 @@
                       <tr>
                         <th scope="col">##</th>
                         <th scope="col">$ 00.00</th>
-                        <th scope="col">{{registro[1]}}</th>
+                        <th scope="col" >$ {{registro[1]}}</th>
                         <th scope="col">{{registro[0]}}</th>
                       </tr>
                     {% endif %}
+                      
                   {% endif %}
                 {%endfor%}
               </tbody>
           </table>
+          
       </div>
-
-
       <div class="col-6">
         <div class="p-3">
-          AQUI VA OTRA TABLA 1
+          <table class="table" id="miTabla" >
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">BANCOS</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col" id="columnaSumar">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==2 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col" > {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <p>HOLAS</p>
+              {% for datosPrueba in datos2 %}
+                <p>{{datosPrueba}}</p>
+              {% endfor %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col" >{{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              
+              {% endif %}       
+              {% endif %}
+              
+              {%endfor%}
+              
+              
+              
+            </tbody>
+          </table>
+          
         </div>
       </div>
 
 
       <div class="col-6">
         <div class="p-3">
-          AQUI VA OTRA TABLA 2
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">INVERSIONES TEMPORALES</th>
+              </tr>
+            </thead>
+          
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==3 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
         </div>
       </div>
 
-
       <div class="col-6">
         <div class="p-3">
-          AQUI VA OTRA TABLA 3 
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">ALMACENES</th>
+              </tr>
+            </thead>
+
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==4 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
         </div>
       </div>
 
-
       <div class="col-6">
         <div class="p-3">
-          AQUI VA OTRA TABLA 4
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">CLIENTES</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==5 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
         </div>
       </div>
 
-
       <div class="col-6">
         <div class="p-3">
-          AQUI VA OTRA TABLA 5
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">DOCUMENTOS POR COBRAR</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==6 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
         </div>
       </div>
-
-
       <div class="col-6">
         <div class="p-3">
-          AQUI VA OTRA TABLA 6 
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">DEUDORES DIVERSOS</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==7 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">ANTICIPO A PROVEEDORES</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==8 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">TERRENOS</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==9 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">EDIFICIOS</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==10 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
         </div>
       </div>
       
-      
       <div class="col-6">
         <div class="p-3">
-          AQUI VA OTRA TABLA 7
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">MOBILIARIOS</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==11 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">${{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
         </div>
       </div>
 
+      <div class="col-6">
+        <div class="p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">EQUIPO DE COMPUTO</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==12 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">${{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
 
+      <div class="col-6">
+        <div class="p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">EQUIPO DE ENTREGA</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==13 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">${{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
 
+      <div class="col-6">
+        <div class="p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">DEPÓSITO EN GARANTÍA</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==14 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">${{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
 
+      <div class="col-6">
+        <div class="p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">INVERSIONES PERMANENTES</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==15 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">${{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
 
+      <div class="col-6">
+        <div class="p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">GASTOS DE INVESTIGACIÓN</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==16 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">${{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">GASTOS EN ETAPAS PREOPERATIVAS</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==17 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">${{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">GASTOS DE MERCADOTECNIA</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==18 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">${{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">GASTOS DE ORGANIZACIÓN</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==19 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">${{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">GASTOS DE INSTALACIÓN</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==20 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">${{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">PAPELERIA Y ÚTILES</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==21 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">${{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">PROPAGANDA Y PUBLICIDAD</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==22 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">${{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">PRIMAS DE SEGUROS</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==23 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">${{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">RENTAS PAGADAS POR ANTICIPADO</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==24 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">${{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div class="col-6">
+        <div class="p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">INTERESES PAGADOS POR ANTICIPADO</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==25 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">${{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">PROVEEDORES</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==26 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">${{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">DOCUMENTOS POR PAGAR</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==27 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">${{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">ACREEDORES DIVERSOS</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==28 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">${{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">ANTICIPO DE CLIENTES</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==29 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">${{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">GASTOS PENDIENTES DE PAGO</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==30 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">${{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">IMPUESTOS POR PAGAR</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==31 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">${{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">HIPOTECAS POR PAGAR</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==32 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">${{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">DOCUMENTOS POR PAGAR LARGO PLAZO</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==33 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">${{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">CUENTAS POR PAGAR A LARGO PLAZO</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==34 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">${{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">RENTAS COBRADAS POR ANTICIPADO</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==35 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">${{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">INTERESES COBRADOS PORANTICIPO</th>
+              </tr>
+            </thead>
+      
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ABONO</th>
+                <th scope="col">CARGO</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for registro in conjuntoDatos%}
+              {% if registro[3]==36 %} <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
+              <tr>
+                <th scope="col">{{registro[0]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">##</th>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">##</th>
+                <th scope="col">$ 00.00</th>
+                <th scope="col">${{registro[1]}}</th>
+                <th scope="col">{{registro[0]}}</th>
+              </tr>
+              {% endif %}
+              {% endif %}
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
 
     </div>
 </div>
-{% endblock %}
+{%endblock%}
