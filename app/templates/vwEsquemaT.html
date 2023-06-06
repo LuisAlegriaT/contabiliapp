@@ -15,7 +15,7 @@
 
 <div class="container text-center border-primary">
     
-
+  <form action="/vw_insertEsquema/{{idFormato}}" method="POST">
     <div class="row g-3">
       <div class="col-6">
         <table class="table">
@@ -51,9 +51,33 @@
                         <th scope="col">{{registro[0]}}</th>
                       </tr>
                     {% endif %}
-                      
                   {% endif %}
                 {%endfor%}
+                <tr>
+                  <th>TOTAL ABONO</th>
+                  <th><span>$ </span>{{sumaAbonoCajas}}</th>
+                  <th><span>$ </span>{{sumaCargoCajas}}</th>
+                  <th>TOTAL CARGO</th>
+                </tr>
+                {% if totalCajas %}
+                  <tr>
+                    <th></th>
+                    <td colspan="2" name="totalCajas">
+                      <span>$ 0.00</span> 
+                    </td>
+                    <th></th>
+                  </tr>
+                {% else %}
+                  <tr>
+                    <th></th>
+                    <td colspan="2" name="totalCajas">
+                      <span>$ </span><p>{{totalCajas}}</p>
+                    </td>
+                    <th></th>
+                  </tr>
+                  
+                {% endif %}  
+
               </tbody>
           </table>
           
@@ -100,13 +124,13 @@
               
               <tr>
                 <th>TOTAL ABONO</th>
-                <th><span>$ </span>{{sumaAbonoBanco}}</th>
+                <th ><span>$ </span>{{sumaAbonoBanco}}</th>
                 <th><span>$ </span>{{sumaCargoBanco}}</th>
                 <th>TOTAL CARGO</th>
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2">
+                <td colspan="2" name="totalBanco">
                   <span>$ </span>{{totalBanco}}
                 </td>
                 <th></th>
@@ -156,6 +180,21 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoInversiones}}</th>
+                <th><span>$ </span>{{sumaCargoInversiones}}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalInversiones">
+                  <span>$ </span>{{totalInversiones}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -198,6 +237,20 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoAlmacenes}}</th>
+                <th><span>$ </span>{{sumaCargoAlmacenes}}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalAlmacenes">
+                  <span>$ </span>{{totalAlmacenes}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -240,6 +293,20 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoClientes }}</th>
+                <th><span>$ </span>{{sumaCargoClientes }}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalClientes">
+                  <span>$ </span>{{totalClientes}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -282,6 +349,20 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoDocumentosC }}</th>
+                <th><span>$ </span>{{sumaCargoDocumentosC }}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalDocumentosC">
+                  <span>$ </span>{{totalDocumentosC}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -323,6 +404,20 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoDeudoresD }}</th>
+                <th><span>$ </span>{{sumaCargoDeudoresD }}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalDeudoresD">
+                  <span>$ </span>{{totalDeudoresD}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -364,6 +459,20 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoAnticipoP }}</th>
+                <th><span>$ </span>{{sumaCargoAnticipoP }}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalAnticipoP">
+                  <span>$ </span>{{totalAnticipoP}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -405,6 +514,20 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoTerreno }}</th>
+                <th><span>$ </span>{{sumaCargoTerreno }}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalTerreno">
+                  <span>$ </span>{{totalTerreno}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -446,6 +569,20 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoEdificios }}</th>
+                <th><span>$ </span>{{sumaCargoEdificios}}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalEdificios">
+                  <span>$ </span>{{totalEdificios}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -488,6 +625,20 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoMobiliarios }}</th>
+                <th><span>$ </span>{{sumaCargoMobiliarios}}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalMobiliarios">
+                  <span>$ </span>{{totalMobiliarios}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -530,6 +681,20 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoEquipoC}}</th>
+                <th><span>$ </span>{{sumaCargoEquipoC}}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalEquipoC">
+                  <span>$ </span>{{totalEquipoC}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -572,6 +737,20 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoEquipoE}}</th>
+                <th><span>$ </span>{{sumaCargoEquipoE}}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalEquipoE">
+                  <span>$ </span>{{totalEquipoE}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -614,6 +793,20 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoDepositoG}}</th>
+                <th><span>$ </span>{{sumaCargoDepositoG}}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalDepositoG">
+                  <span>$ </span>{{totalDepositoG}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -656,6 +849,20 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoInversionP}}</th>
+                <th><span>$ </span>{{sumaCargoInversionP}}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalInversionP">
+                  <span>$ </span>{{totalInversionP}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -698,6 +905,20 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoGastosI}}</th>
+                <th><span>$ </span>{{sumaCargoGastosI}}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalGastosI">
+                  <span>$ </span>{{totalGastosI}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -740,6 +961,20 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoGastosE}}</th>
+                <th><span>$ </span>{{sumaCargoGastosE}}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalGastosE">
+                  <span>$ </span>{{totalGastosE}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -782,6 +1017,20 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoGastosM}}</th>
+                <th><span>$ </span>{{sumaCargoGastosM}}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalGastosM">
+                  <span>$ </span>{{totalGastosM}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -824,6 +1073,20 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoGastosO}}</th>
+                <th><span>$ </span>{{sumaCargoGastosO}}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalGastosO">
+                  <span>$ </span>{{totalGastosO}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -866,6 +1129,21 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoGastosIn}}</th>
+                <th><span>$ </span>{{sumaCargoGastosIn}}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalGastosIn">
+                  <span>$ </span>{{totalGastosIn}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -908,6 +1186,21 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoPapeleria}}</th>
+                <th><span>$ </span>{{sumaCargoPapeleria}}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalPapeleria">
+                  <span>$ </span>{{totalPapeleria}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -950,6 +1243,20 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoPropaganda}}</th>
+                <th><span>$ </span>{{sumaCargoPropaganda}}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalPropaganda">
+                  <span>$ </span>{{totalPropaganda}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -992,6 +1299,20 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoPrimasS}}</th>
+                <th><span>$ </span>{{sumaCargoPrimasS}}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalPrimasS">
+                  <span>$ </span>{{totalPrimasS}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -1034,6 +1355,20 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoRentasP}}</th>
+                <th><span>$ </span>{{sumaCargoRentasP}}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalRentasP">
+                  <span>$ </span>{{totalRentasP}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -1076,6 +1411,20 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoInteresesP}}</th>
+                <th><span>$ </span>{{sumaCargoInteresesP}}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalInteresesP">
+                  <span>$ </span>{{totalInteresesP}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -1118,6 +1467,20 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoProveedores}}</th>
+                <th><span>$ </span>{{sumaCargoProveedores}}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalProveedores ">
+                  <span>$ </span>{{totalProveedores}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -1160,6 +1523,20 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoDocumentosP}}</th>
+                <th><span>$ </span>{{sumaCargoDocumentosP}}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalDocumentosP">
+                  <span>$ </span>{{totalDocumentosP}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -1202,6 +1579,20 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoAcreedoresD}}</th>
+                <th><span>$ </span>{{sumaCargoAcreedoresD}}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalAcreedoresD">
+                  <span>$ </span>{{totalAcreedoresD}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -1244,6 +1635,20 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoAnticipoC}}</th>
+                <th><span>$ </span>{{sumaCargoAnticipoC}}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalAnticipoC">
+                  <span>$ </span>{{totalAnticipoC}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -1286,6 +1691,20 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoGastosP}}</th>
+                <th><span>$ </span>{{sumaCargoGastosP}}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalGastosP">
+                  <span>$ </span>{{totalGastosP}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -1328,6 +1747,20 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoImpuestosP}}</th>
+                <th><span>$ </span>{{sumaCargoImpuestosP}}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalImpuestosP">
+                  <span>$ </span>{{totalImpuestosP}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -1370,6 +1803,20 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoHipotecas}}</th>
+                <th><span>$ </span>{{sumaCargoHipotecas}}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalHipotecas">
+                  <span>$ </span>{{totalHipotecas}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -1412,6 +1859,20 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoDocumentosPL}}</th>
+                <th><span>$ </span>{{sumaCargoDocumentosPL}}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalDocumentosPL">
+                  <span>$ </span>{{totalDocumentosPL}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -1454,6 +1915,20 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoCuentasPL}}</th>
+                <th><span>$ </span>{{sumaCargoCuentasPL}}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalCuentasPL">
+                  <span>$ </span>{{totalCuentasPL}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -1496,6 +1971,20 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoRentasC}}</th>
+                <th><span>$ </span>{{sumaCargoRentasC}}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalRentasC">
+                  <span>$ </span>{{totalRentasC}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -1538,11 +2027,28 @@
               {% endif %}
               {% endif %}
               {%endfor%}
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoInteresesC}}</th>
+                <th><span>$ </span>{{sumaCargoInteresesC}}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2" name="totalInteresesC">
+                  <span>$ </span>{{totalInteresesC}}
+                </td>
+                <th></th>
+              </tr>
+
             </tbody>
           </table>
         </div>
       </div>
 
+
     </div>
+    <button class="btn btn-primary">BALANCE</button>
+  </form> 
 </div>
 {%endblock%}

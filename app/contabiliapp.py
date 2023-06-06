@@ -93,18 +93,1078 @@ def vwEsquemaT(idFormato):
         sumaCargoBanco = resultado[0]
     else:
         print("No se encontraron resultados.") 
+    if sumaAbonoBanco is not None and sumaCargoBanco is not None:
+        totalBanco=sumaAbonoBanco-sumaCargoBanco #RESTA DE ABONO Y CARGO
 
-    totalBanco=sumaAbonoBanco-sumaCargoBanco #RESTA DE ABONO Y CARGO
-    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!HACER UN INSERT EN LA TABLA TOTALES EN EL CAMPO TOTAL PONDREMOS LO QUE VALGA LA VARIABLE totalBanco!!!!!!!!!!!!!!!!!!!!!!!
-
+    else:
+        print("Uno o ambos valores son None.")
 
     #AQUI DEBERIA INICIAR SUMA DE INVERSIONES TEMPORALES
+     #SUMAS DE CAJA
+    sumaAbonoCa = mysql.connection.cursor()
+    sumaAbonoCa.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=1',[idFormato])
+    resultadoCa = sumaAbonoCa.fetchone()
+    sumaAbonoCa=mysql.connection.cursor()
+
+    if resultadoCa is not None:#Comprueba si viene vacio
+        sumaAbonoCajas= resultadoCa[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+
+    sumaCargoCa = mysql.connection.cursor()
+    sumaCargoCa.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=1',[idFormato])
+    resultadoCa = sumaCargoCa.fetchone()
+    sumaCargoCa=mysql.connection.cursor()
+    totalCajas = 0 
+    if resultadoCa is not None:
+        sumaCargoCajas = resultadoCa[0]
+    else:
+        print("No se encontraron resultados.")
+
+    if sumaAbonoCajas is not None and sumaCargoCajas is not None:
+        totalCajas = sumaAbonoCajas - sumaCargoCajas
+    else:
+        print("Uno o ambos valores son None.")
+
+    #SUMAS DE Inversiones
+    sumaAbonoIn = mysql.connection.cursor()
+    sumaAbonoIn.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=3',[idFormato])
+    resultadoIn = sumaAbonoIn.fetchone()
+    sumaAbonoIn=mysql.connection.cursor()
+
+    if resultadoIn is not None:#Comprueba si viene vacio
+        sumaAbonoInversiones = resultadoIn[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalInversiones=0
+    sumaCargoIn = mysql.connection.cursor()
+    sumaCargoIn.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=3',[idFormato])
+    resultadoIn = sumaCargoIn.fetchone()
+    sumaCargoIn=mysql.connection.cursor()
+    if resultadoIn is not None:
+        sumaCargoInversiones = resultadoIn[0]
+    else:
+        print("No se encontraron resultados.")
+
+    if sumaAbonoInversiones is not None and sumaCargoInversiones is not None:
+        totalInversiones=sumaAbonoInversiones-sumaCargoInversiones
+    else:
+        print("Uno o ambos valores son None.")
+
+
+   
+
+     #SUMAS DE ALMACENES
+    sumaAbonoAL = mysql.connection.cursor()
+    sumaAbonoAL.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=4',[idFormato])
+    resultadoAL = sumaAbonoAL.fetchone()
+    sumaAbonoAL=mysql.connection.cursor()
+
+    if resultadoAL is not None:#Comprueba si viene vacio
+        sumaAbonoAlmacenes = resultadoAL[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalAlmacenes=0
+    sumaCargoAL = mysql.connection.cursor()
+    sumaCargoAL.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=4',[idFormato])
+    resultadoAL = sumaCargoAL.fetchone()
+    sumaCargoAL=mysql.connection.cursor()
+    if resultadoAL is not None:
+        sumaCargoAlmacenes  = resultadoAL[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoAlmacenes is not None and sumaCargoAlmacenes is not None:
+        totalAlmacenes =sumaAbonoAlmacenes -sumaCargoAlmacenes
+    else:
+        print("Uno o ambos valores son None.")
+     
+
+     #SUMAS DE Clientes 
+    sumaAbonoCl = mysql.connection.cursor()
+    sumaAbonoCl.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=5',[idFormato])
+    resultadoCl = sumaAbonoCl.fetchone()
+    sumaAbonoCl=mysql.connection.cursor()
+
+    if resultadoCl is not None:#Comprueba si viene vacio
+        sumaAbonoClientes = resultadoCl[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalClientes=0
+    sumaCargoCl = mysql.connection.cursor()
+    sumaCargoCl.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=5',[idFormato])
+    resultadoCl = sumaCargoCl.fetchone()
+    sumaCargoCl=mysql.connection.cursor()
+    if resultadoCl is not None:
+        sumaCargoClientes  = resultadoCl[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoClientes is not None and sumaCargoClientes is not None:
+        totalClientes =sumaAbonoClientes -sumaCargoClientes
+    else:
+        print("Uno o ambos valores son None.")
+     
+
+     #SUMAS DE DocumentosC
+    sumaAbonoDC = mysql.connection.cursor()
+    sumaAbonoDC.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=6',[idFormato])
+    resultadoDC = sumaAbonoDC.fetchone()
+    sumaAbonoDC=mysql.connection.cursor()
+
+    if resultadoDC is not None:#Comprueba si viene vacio
+        sumaAbonoDocumentosC= resultadoDC[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalDocumentosC=0
+    sumaCargoDC = mysql.connection.cursor()
+    sumaCargoDC.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=6',[idFormato])
+    resultadoDC = sumaCargoDC.fetchone()
+    sumaCargoDC=mysql.connection.cursor()
+    if resultadoDC is not None:
+        sumaCargoDocumentosC = resultadoDC[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoDocumentosC is not None and sumaCargoDocumentosC is not None:
+        totalDocumentosC=sumaAbonoDocumentosC-sumaCargoDocumentosC
+    else:
+        print("Uno o ambos valores son None.")
+    
+
+     #SUMAS DE DeudoresD
+    sumaAbonoDD = mysql.connection.cursor()
+    sumaAbonoDD.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=7',[idFormato])
+    resultadoDD = sumaAbonoDD.fetchone()
+    sumaAbonoDD=mysql.connection.cursor()
+
+    if resultadoDD is not None:#Comprueba si viene vacio
+        sumaAbonoDeudoresD= resultadoDD[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalDeudoresD=0
+    sumaCargoDD = mysql.connection.cursor()
+    sumaCargoDD.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=7',[idFormato])
+    resultadoDD = sumaCargoDD.fetchone()
+    sumaCargoDD=mysql.connection.cursor()
+    if resultadoDD is not None:
+        sumaCargoDeudoresD = resultadoDD[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoDeudoresD is not None and sumaCargoDeudoresD is not None:
+        totalDeudoresD=sumaAbonoDeudoresD-sumaCargoDeudoresD
+    else:
+        print("Uno o ambos valores son None.")
+   
+
+     #SUMAS DE AnticipoP
+    sumaAbonoAP = mysql.connection.cursor()
+    sumaAbonoAP.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=8',[idFormato])
+    resultadoAP = sumaAbonoAP.fetchone()
+    sumaAbonoAP=mysql.connection.cursor()
+
+    if resultadoAP is not None:#Comprueba si viene vacio
+        sumaAbonoAnticipoP= resultadoAP[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalAnticipoP=0
+    sumaCargoAP = mysql.connection.cursor()
+    sumaCargoAP.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=8',[idFormato])
+    resultadoAP = sumaCargoAP.fetchone()
+    sumaCargoAP=mysql.connection.cursor()
+    if resultadoAP is not None:
+        sumaCargoAnticipoP = resultadoAP[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoAnticipoP is not None and sumaCargoAnticipoP is not None:
+        totalAnticipoP=sumaAbonoAnticipoP-sumaCargoAnticipoP
+    else:
+        print("Uno o ambos valores son None.")
+    
+
+     #SUMAS DE Terreno
+    sumaAbonoTE = mysql.connection.cursor()
+    sumaAbonoTE.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=9',[idFormato])
+    resultadoTE = sumaAbonoTE.fetchone()
+    sumaAbonoTE=mysql.connection.cursor()
+
+    if resultadoTE is not None:#Comprueba si viene vacio
+        sumaAbonoTerreno= resultadoTE[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalTerreno=0
+    sumaCargoTE = mysql.connection.cursor()
+    sumaCargoTE.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=9',[idFormato])
+    resultadoTE = sumaCargoTE.fetchone()
+    sumaCargoTE=mysql.connection.cursor()
+    if resultadoTE is not None:
+        sumaCargoTerreno= resultadoTE[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoTerreno is not None and sumaCargoTerreno is not None:
+        totalTerreno=sumaAbonoTerreno-sumaCargoTerreno
+    else:
+        print("Uno o ambos valores son None.")
+    
+
+     #SUMAS DE Edificios
+    sumaAbonoED = mysql.connection.cursor()
+    sumaAbonoED.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=10',[idFormato])
+    resultadoED = sumaAbonoED.fetchone()
+    sumaAbonoED=mysql.connection.cursor()
+
+    if resultadoED is not None:#Comprueba si viene vacio
+        sumaAbonoEdificios= resultadoED[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalEdificios=0
+    sumaCargoED = mysql.connection.cursor()
+    sumaCargoED.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=10',[idFormato])
+    resultadoED = sumaCargoED.fetchone()
+    sumaCargoED=mysql.connection.cursor()
+    if resultadoED is not None:
+        sumaCargoEdificios = resultadoED[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoEdificios is not None and sumaCargoEdificios is not None:
+        totalEdificios=sumaAbonoEdificios-sumaCargoEdificios
+    else:
+        print("Uno o ambos valores son None.")
+    
+    ####
+    #SUMAS DE Mobiliarios
+    sumaAbonoMO = mysql.connection.cursor()
+    sumaAbonoMO.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=11',[idFormato])
+    resultadoMO = sumaAbonoMO.fetchone()
+    sumaAbonoMO=mysql.connection.cursor()
+
+    if resultadoMO is not None:#Comprueba si viene vacio
+        sumaAbonoMobiliarios= resultadoMO[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalMobiliarios=0
+    sumaCargoMO = mysql.connection.cursor()
+    sumaCargoMO.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=11',[idFormato])
+    resultadoMO = sumaCargoMO.fetchone()
+    sumaCargoMO=mysql.connection.cursor()
+    if resultadoMO is not None:
+        sumaCargoMobiliarios = resultadoMO[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoMobiliarios is not None and sumaCargoMobiliarios is not None:
+        totalMobiliarios=sumaAbonoMobiliarios-sumaCargoMobiliarios
+    else:
+        print("Uno o ambos valores son None.")
+   
+    #SUMAS DE EquipoC
+    sumaAbonoEC = mysql.connection.cursor()
+    sumaAbonoEC.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=12',[idFormato])
+    resultadoEC = sumaAbonoEC.fetchone()
+    sumaAbonoEC=mysql.connection.cursor()
+
+    if resultadoEC is not None:#Comprueba si viene vacio
+        sumaAbonoEquipoC= resultadoEC[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalEquipoC=0
+    sumaCargoEC = mysql.connection.cursor()
+    sumaCargoEC.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=12',[idFormato])
+    resultadoEC = sumaCargoEC.fetchone()
+    sumaCargoEC=mysql.connection.cursor()
+    if resultadoEC is not None:
+        sumaCargoEquipoC = resultadoEC[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoEquipoC is not None and sumaCargoEquipoC is not None:
+        totalEquipoC=sumaAbonoEquipoC-sumaCargoEquipoC
+    else:
+        print("Uno o ambos valores son None.")
+
+    #SUMAS DE EquipoE
+    sumaAbonoEE = mysql.connection.cursor()
+    sumaAbonoEE.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=13',[idFormato])
+    resultadoEE = sumaAbonoEE.fetchone()
+    sumaAbonoEE=mysql.connection.cursor()
+
+    if resultadoEE is not None:#Comprueba si viene vacio
+        sumaAbonoEquipoE = resultadoEE[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalEquipoE=0
+    sumaCargoEE = mysql.connection.cursor()
+    sumaCargoEE.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=13',[idFormato])
+    resultadoEE = sumaCargoEE.fetchone()
+    sumaCargoEE=mysql.connection.cursor()
+    if resultadoEE is not None:
+        sumaCargoEquipoE = resultadoEE[0]
+    else:
+        print("No se encontraron resultados.")
+    if sumaAbonoEquipoE is not None and sumaCargoEquipoE is not None:
+        totalEquipoE=sumaAbonoEquipoE-sumaCargoEquipoE
+    else:
+        print("Uno o ambos valores son None.")
+
+
+     #SUMAS DE DepositoG
+    sumaAbonoDG = mysql.connection.cursor()
+    sumaAbonoDG.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=14',[idFormato])
+    resultadoDG = sumaAbonoDG.fetchone()
+    sumaAbonoDG=mysql.connection.cursor()
+
+    if resultadoDG is not None:#Comprueba si viene vacio
+        sumaAbonoDepositoG = resultadoDG[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalDepositoG=0
+    sumaCargoDG = mysql.connection.cursor()
+    sumaCargoDG.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=14',[idFormato])
+    resultadoDG = sumaCargoDG.fetchone()
+    sumaCargoDG=mysql.connection.cursor()
+    if resultadoDG is not None:
+        sumaCargoDepositoG  = resultadoDG[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoDepositoG is not None and sumaCargoDepositoG is not None:
+        totalDepositoG =sumaAbonoDepositoG -sumaCargoDepositoG
+    else:
+        print("Uno o ambos valores son None.")
+
+     #SUMAS DE InversionP 
+    sumaAbonoIP = mysql.connection.cursor()
+    sumaAbonoIP.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=15',[idFormato])
+    resultadoIP = sumaAbonoIP.fetchone()
+    sumaAbonoIP=mysql.connection.cursor()
+
+    if resultadoIP is not None:#Comprueba si viene vacio
+        sumaAbonoInversionP= resultadoIP[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalInversionP=0
+    sumaCargoIP = mysql.connection.cursor()
+    sumaCargoIP.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=15',[idFormato])
+    resultadoIP = sumaCargoIP.fetchone()
+    sumaCargoIP=mysql.connection.cursor()
+    if resultadoIP is not None:
+        sumaCargoInversionP  = resultadoIP[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoInversionP is not None and sumaCargoInversionP is not None:
+        totalInversionP =sumaAbonoInversionP -sumaCargoInversionP
+    else:
+        print("Uno o ambos valores son None.")
+
+     #SUMAS DE GastosI
+    sumaAbonoGI = mysql.connection.cursor()
+    sumaAbonoGI.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=16',[idFormato])
+    resultadoGI = sumaAbonoGI.fetchone()
+    sumaAbonoGI=mysql.connection.cursor()
+
+    if resultadoGI is not None:#Comprueba si viene vacio
+        sumaAbonoGastosI= resultadoGI[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalGastosI=0
+    sumaCargoGI = mysql.connection.cursor()
+    sumaCargoGI.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=16',[idFormato])
+    resultadoGI = sumaCargoGI.fetchone()
+    sumaCargoGI=mysql.connection.cursor()
+    if resultadoDC is not None:
+        sumaCargoGastosI = resultadoGI[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoGastosI is not None and sumaCargoGastosI is not None:  
+        totalGastosI=sumaAbonoGastosI-sumaCargoGastosI
+    else:
+        print("Uno o ambos valores son None.")
+
+     #SUMAS DE GastosE
+    sumaAbonoGE = mysql.connection.cursor()
+    sumaAbonoGE.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=17',[idFormato])
+    resultadoGE = sumaAbonoGE.fetchone()
+    sumaAbonoGE=mysql.connection.cursor()
+
+    if resultadoGE is not None:#Comprueba si viene vacio
+        sumaAbonoGastosE= resultadoGE[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalGastosE=0
+    sumaCargoGE = mysql.connection.cursor()
+    sumaCargoGE.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=17',[idFormato])
+    resultadoGE = sumaCargoGE.fetchone()
+    sumaCargoGE=mysql.connection.cursor()
+    if resultadoGE is not None:
+        sumaCargoGastosE = resultadoGE[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoGastosE is not None and sumaCargoGastosE is not None:  
+        totalGastosE=sumaAbonoGastosE-sumaCargoGastosE
+    else:
+        print("Uno o ambos valores son None.")
+
+     #SUMAS DE GastosM
+    sumaAbonoGM = mysql.connection.cursor()
+    sumaAbonoGM.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=18',[idFormato])
+    resultadoGM = sumaAbonoGM.fetchone()
+    sumaAbonoGM=mysql.connection.cursor()
+
+    if resultadoGM is not None:#Comprueba si viene vacio
+        sumaAbonoGastosM= resultadoGM[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalGastosM=0
+    sumaCargoGM = mysql.connection.cursor()
+    sumaCargoGM.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=18',[idFormato])
+    resultadoGM = sumaCargoGM.fetchone()
+    sumaCargoGM=mysql.connection.cursor()
+    if resultadoGM is not None:
+        sumaCargoGastosM = resultadoGM[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoGastosM is not None and sumaCargoGastosM is not None:
+        totalGastosM=sumaAbonoGastosM-sumaCargoGastosM
+    else:
+        print("Uno o ambos valores son None.")
+
+     #SUMAS DE GastosO
+    sumaAbonoGO = mysql.connection.cursor()
+    sumaAbonoGO.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=19',[idFormato])
+    resultadoGO = sumaAbonoGO.fetchone()
+    sumaAbonoGO=mysql.connection.cursor()
+
+    if resultadoGO is not None:#Comprueba si viene vacio
+        sumaAbonoGastosO= resultadoGO[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalGastosO=0
+    sumaCargoGO = mysql.connection.cursor()
+    sumaCargoGO.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=19',[idFormato])
+    resultadoGO = sumaCargoGO.fetchone()
+    sumaCargoGO=mysql.connection.cursor()
+    if resultadoGO is not None:
+        sumaCargoGastosO = resultadoGO[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoGastosO is not None and sumaCargoGastosO is not None: 
+        totalGastosO=sumaAbonoGastosO-sumaCargoGastosO
+    else:
+        print("Uno o ambos valores son None.")
+
+         #SUMAS DE GastosIn
+    sumaAbonoGIN = mysql.connection.cursor()
+    sumaAbonoGIN.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=20',[idFormato])
+    resultadoGIN = sumaAbonoGIN.fetchone()
+    sumaAbonoGIN=mysql.connection.cursor()
+
+    if resultadoGIN is not None:#Comprueba si viene vacio
+        sumaAbonoGastosIn= resultadoGIN[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalGastosIn=0
+    sumaCargoGIN = mysql.connection.cursor()
+    sumaCargoGIN.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=20',[idFormato])
+    resultadoGIN = sumaCargoGIN.fetchone()
+    sumaCargoGIN=mysql.connection.cursor()
+    if resultadoGIN is not None:
+        sumaCargoGastosIn = resultadoGIN[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoGastosIn is not None and sumaCargoGastosIn is not None:
+        
+        totalGastosIn=sumaAbonoGastosIn-sumaCargoGastosIn
+    else:
+        print("Uno o ambos valores son None.")
+
+    #SUMAS DE Papeleria
+    sumaAbonoPA = mysql.connection.cursor()
+    sumaAbonoPA.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=21',[idFormato])
+    resultadoPA = sumaAbonoPA.fetchone()
+    sumaAbonoPA=mysql.connection.cursor()
+
+    if resultadoPA is not None:#Comprueba si viene vacio
+        sumaAbonoPapeleria= resultadoPA[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalPapeleria=0
+    sumaCargoPA = mysql.connection.cursor()
+    sumaCargoPA.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=21',[idFormato])
+    resultadoPA = sumaCargoPA.fetchone()
+    sumaCargoPA=mysql.connection.cursor()
+    if resultadoPA is not None:
+        sumaCargoPapeleria = resultadoPA[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoPapeleria is not None and sumaCargoPapeleria is not None:
+
+        totalPapeleria=sumaAbonoPapeleria-sumaCargoPapeleria
+    else:
+        print("Uno o ambos valores son None.")
+
+    #SUMAS DE Propaganda
+    sumaAbonoPR = mysql.connection.cursor()
+    sumaAbonoPR.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=22',[idFormato])
+    resultadoPR = sumaAbonoPR.fetchone()
+    sumaAbonoPR=mysql.connection.cursor()
+
+    if resultadoPR is not None:#Comprueba si viene vacio
+        sumaAbonoPropaganda = resultadoPR[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalPropaganda=0
+    sumaCargoPR = mysql.connection.cursor()
+    sumaCargoPR.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=22',[idFormato])
+    resultadoPR = sumaCargoPR.fetchone()
+    sumaCargoPR=mysql.connection.cursor()
+    if resultadoPR is not None:
+        sumaCargoPropaganda = resultadoPR[0]
+    else:
+        print("No se encontraron resultados.")
+    if sumaAbonoPropaganda is not None and sumaCargoPropaganda is not None:
+        totalPropaganda=sumaAbonoPropaganda-sumaCargoPropaganda   
+    else:
+        print("Uno o ambos valores son None.")
+
+     #SUMAS DE PrimasS
+    sumaAbonoPS = mysql.connection.cursor()
+    sumaAbonoPS.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=23',[idFormato])
+    resultadoPS = sumaAbonoPS.fetchone()
+    sumaAbonoAL=mysql.connection.cursor()
+
+    if resultadoPS is not None:#Comprueba si viene vacio
+        sumaAbonoPrimasS = resultadoPS[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalPrimasS=0
+    sumaCargoPS = mysql.connection.cursor()
+    sumaCargoPS.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=23',[idFormato])
+    resultadoPS = sumaCargoPS.fetchone()
+    sumaCargoPS=mysql.connection.cursor()
+    if resultadoPS is not None:
+        sumaCargoPrimasS  = resultadoPS[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoPrimasS is not None and sumaCargoPrimasS is not None:
+        totalPrimasS =sumaAbonoPrimasS -sumaCargoPrimasS 
+    else:
+        print("Uno o ambos valores son None.")
+
+     #SUMAS DE RentasP 
+    sumaAbonoRP = mysql.connection.cursor()
+    sumaAbonoRP.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=24',[idFormato])
+    resultadoRP = sumaAbonoRP.fetchone()
+    sumaAbonoRP=mysql.connection.cursor()
+
+    if resultadoRP is not None:#Comprueba si viene vacio
+        sumaAbonoRentasP = resultadoRP[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalRentasP=0
+    sumaCargoRP = mysql.connection.cursor()
+    sumaCargoRP.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=24',[idFormato])
+    resultadoRP = sumaCargoRP.fetchone()
+    sumaCargoRP=mysql.connection.cursor()
+    if resultadoRP is not None:
+        sumaCargoRentasP  = resultadoRP[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoRentasP is not None and sumaCargoRentasP is not None:
+        totalRentasP =sumaAbonoRentasP -sumaCargoRentasP
+    else:
+        print("Uno o ambos valores son None.") 
+
+     #SUMAS DE InteresesP
+    sumaAbonoIP = mysql.connection.cursor()
+    sumaAbonoIP.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=25',[idFormato])
+    resultadoIP = sumaAbonoIP.fetchone()
+    sumaAbonoIP=mysql.connection.cursor()
+
+    if resultadoIP is not None:#Comprueba si viene vacio
+        sumaAbonoInteresesP= resultadoIP[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalInteresesP=0
+    sumaCargoIP = mysql.connection.cursor()
+    sumaCargoIP.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=25',[idFormato])
+    resultadoIP = sumaCargoIP.fetchone()
+    sumaCargoIP=mysql.connection.cursor()
+    if resultadoIP is not None:
+        sumaCargoInteresesP = resultadoIP[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoInteresesP is not None and sumaCargoInteresesP is not None:
+        totalInteresesP=sumaAbonoInteresesP-sumaCargoInteresesP
+    else:
+        print("Uno o ambos valores son None.")
+
+     #SUMAS DE Proveedores 
+    sumaAbonoP = mysql.connection.cursor()
+    sumaAbonoP.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=26',[idFormato])
+    resultadoP = sumaAbonoP.fetchone()
+    sumaAbonoP =mysql.connection.cursor()
+
+    if resultadoP is not None:#Comprueba si viene vacio
+        sumaAbonoProveedores = resultadoP[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalProveedores=0
+    sumaCargoP = mysql.connection.cursor()
+    sumaCargoP.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=26',[idFormato])
+    resultadoP = sumaCargoP.fetchone()
+    sumaCargoP=mysql.connection.cursor()
+    if resultadoP is not None:
+        sumaCargoProveedores  = resultadoP[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoProveedores is not None and sumaCargoProveedores is not None:
+        totalProveedores =sumaAbonoProveedores -sumaCargoProveedores 
+    else:
+        print("Uno o ambos valores son None.")
+
+     #SUMAS DE DocumentosP
+    sumaAbonoDP = mysql.connection.cursor()
+    sumaAbonoDP.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=27',[idFormato])
+    resultadoDP = sumaAbonoDP.fetchone()
+    sumaAbonoDP=mysql.connection.cursor()
+
+    if resultadoDP is not None:#Comprueba si viene vacio
+        sumaAbonoDocumentosP= resultadoDP[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalDocumentosP=0
+    sumaCargoDP = mysql.connection.cursor()
+    sumaCargoDP.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=27',[idFormato])
+    resultadoDP = sumaCargoDP.fetchone()
+    sumaCargoDP=mysql.connection.cursor()
+    if resultadoDP is not None:
+        sumaCargoDocumentosP = resultadoDP[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoDocumentosP is not None and sumaCargoDocumentosP is not None:
+        totalDocumentosP=sumaAbonoDocumentosP-sumaCargoDocumentosP
+    else:
+        print("Uno o ambos valores son None.")
+
+     #SUMAS DE AcreedoresD
+    sumaAbonoAD = mysql.connection.cursor()
+    sumaAbonoAD.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=28',[idFormato])
+    resultadoAD = sumaAbonoAD.fetchone()
+    sumaAbonoAD=mysql.connection.cursor()
+
+    if resultadoAD is not None:#Comprueba si viene vacio
+        sumaAbonoAcreedoresD= resultadoAD[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalAcreedoresD=0
+    sumaCargoAD = mysql.connection.cursor()
+    sumaCargoAD.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=28',[idFormato])
+    resultadoAD = sumaCargoAD.fetchone()
+    sumaCargoAD=mysql.connection.cursor()
+    if resultadoAD is not None:
+        sumaCargoAcreedoresD= resultadoAD[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoAcreedoresD is not None and sumaCargoAcreedoresD is not None:
+        totalAcreedoresD=sumaAbonoAcreedoresD-sumaCargoAcreedoresD
+    else:
+        print("Uno o ambos valores son None.")
+
+     #SUMAS DE AnticipoC
+    sumaAbonoAC = mysql.connection.cursor()
+    sumaAbonoAC.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=29',[idFormato])
+    resultadoAC = sumaAbonoAC.fetchone()
+    sumaAbonoAC=mysql.connection.cursor()
+
+    if resultadoAC is not None:#Comprueba si viene vacio
+        sumaAbonoAnticipoC= resultadoAC[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalAnticipoC=0
+    sumaCargoAC = mysql.connection.cursor()
+    sumaCargoAC.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=29',[idFormato])
+    resultadoAC = sumaCargoAC.fetchone()
+    sumaCargoAC=mysql.connection.cursor()
+    if resultadoAC is not None:
+        sumaCargoAnticipoC = resultadoAC[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoAnticipoC is not None and sumaCargoAnticipoC is not None:
+        totalAnticipoC=sumaAbonoAnticipoC-sumaCargoAnticipoC
+    else:
+        print("Uno o ambos valores son None.")
+
+    #SUMAS DE GastosP
+    sumaAbonoGP = mysql.connection.cursor()
+    sumaAbonoGP.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=30',[idFormato])
+    resultadoGP = sumaAbonoGP.fetchone()
+    sumaAbonoGP=mysql.connection.cursor()
+
+    if resultadoGP is not None:#Comprueba si viene vacio
+        sumaAbonoGastosP= resultadoGP[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalGastosP=0
+    sumaCargoGP = mysql.connection.cursor()
+    sumaCargoGP.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=30',[idFormato])
+    resultadoGP = sumaCargoGP.fetchone()
+    sumaCargoGP=mysql.connection.cursor()
+    if resultadoGP is not None:
+        sumaCargoGastosP = resultadoGP[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoGastosP is not None and sumaCargoGastosP is not None:
+        totalGastosP=sumaAbonoGastosP-sumaCargoGastosP
+    else:
+        print("Uno o ambos valores son None.")
+
+    #SUMAS DE ImpuestosP
+    sumaAbonoIM = mysql.connection.cursor()
+    sumaAbonoIM.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=31',[idFormato])
+    resultadoIM = sumaAbonoIM.fetchone()
+    sumaAbonoIM=mysql.connection.cursor()
+
+    if resultadoIM is not None:#Comprueba si viene vacio
+        sumaAbonoImpuestosP= resultadoIM[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalImpuestosP=0
+    sumaCargoIM = mysql.connection.cursor()
+    sumaCargoIM.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=31',[idFormato])
+    resultadoIM = sumaCargoIM.fetchone()
+    sumaCargoIM=mysql.connection.cursor()
+    if resultadoED is not None:
+        sumaCargoImpuestosP = resultadoIM[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoImpuestosP is not None and sumaCargoImpuestosP is not None:
+        totalImpuestosP=sumaAbonoImpuestosP-sumaCargoImpuestosP
+    else:
+        print("Uno o ambos valores son None.")
+    
+
+    #SUMAS DE Hipotecas
+    sumaAbonoH = mysql.connection.cursor()
+    sumaAbonoH.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=32',[idFormato])
+    resultadoH = sumaAbonoH.fetchone()
+    sumaAbonoH=mysql.connection.cursor()
+
+    if resultadoH is not None:#Comprueba si viene vacio
+        sumaAbonoHipotecas= resultadoH[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalHipotecas=0
+    sumaCargoH = mysql.connection.cursor()
+    sumaCargoH.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=32',[idFormato])
+    resultadoH = sumaCargoH.fetchone()
+    sumaCargoH=mysql.connection.cursor()
+    if resultadoH is not None:
+        sumaCargoHipotecas = resultadoH[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoHipotecas is not None and sumaCargoHipotecas is not None:
+        totalHipotecas=sumaAbonoHipotecas-sumaCargoHipotecas
+    else:
+        print("Uno o ambos valores son None.")
+
+    #SUMAS DE DocumentosPL
+    sumaAbonoDPL = mysql.connection.cursor()
+    sumaAbonoDPL.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=33',[idFormato])
+    resultadoDPL = sumaAbonoDPL.fetchone()
+    sumaAbonoDPL=mysql.connection.cursor()
+
+    if resultadoDPL is not None:#Comprueba si viene vacio
+        sumaAbonoDocumentosPL= resultadoDPL[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalDocumentosPL=0
+    sumaCargoDPL = mysql.connection.cursor()
+    sumaCargoDPL.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=33',[idFormato])
+    resultadoDPL = sumaCargoDPL.fetchone()
+    sumaCargoDPL=mysql.connection.cursor()
+    if resultadoDPL is not None:
+        sumaCargoDocumentosPL = resultadoDPL[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoDocumentosPL is not None and sumaCargoDocumentosPL is not None:
+        totalDocumentosPL=sumaAbonoDocumentosPL-sumaCargoDocumentosPL
+    else:
+        print("Uno o ambos valores son None.")
+    
+
+    #SUMAS DE CuentasPL
+    sumaAbonoC = mysql.connection.cursor()
+    sumaAbonoC.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=34',[idFormato])
+    resultadoC = sumaAbonoC.fetchone()
+    sumaAbonoC=mysql.connection.cursor()
+
+    if resultadoC is not None:#Comprueba si viene vacio
+        sumaAbonoCuentasPL= resultadoC[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalCuentasPL=0
+    sumaCargoC = mysql.connection.cursor()
+    sumaCargoC.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=34',[idFormato])
+    resultadoC = sumaCargoC.fetchone()
+    sumaCargoC=mysql.connection.cursor()
+    if resultadoC is not None:
+        sumaCargoCuentasPL = resultadoC[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoCuentasPL is not None and sumaCargoCuentasPL is not None:
+        totalCuentasPL=sumaAbonoCuentasPL-sumaCargoCuentasPL
+    else:
+        print("Uno o ambos valores son None.")
+
+    #SUMAS DE RentasC
+    sumaAbonoRC = mysql.connection.cursor()
+    sumaAbonoRC.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=35',[idFormato])
+    resultadoRC = sumaAbonoRC.fetchone()
+    sumaAbonoRC=mysql.connection.cursor()
+
+    if resultadoRC is not None:#Comprueba si viene vacio
+        sumaAbonoRentasC= resultadoRC[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalRentasC=0
+    sumaCargoRC = mysql.connection.cursor()
+    sumaCargoRC.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=35',[idFormato])
+    resultadoRC = sumaCargoRC.fetchone()
+    sumaCargoRC=mysql.connection.cursor()
+    if resultadoRC is not None:
+        sumaCargoRentasC = resultadoRC[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoRentasC is not None and sumaCargoRentasC is not None:
+        totalRentasC=sumaAbonoRentasC - sumaCargoRentasC
+    else:
+        print("Uno o ambos valores son None.")
+
+    #SUMAS DE InteresesC
+    sumaAbonoIC = mysql.connection.cursor()
+    sumaAbonoIC.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=36',[idFormato])
+    resultadoIC = sumaAbonoIC.fetchone()
+    sumaAbonoIC=mysql.connection.cursor()
+
+    if resultadoIC is not None:#Comprueba si viene vacio
+        sumaAbonoInteresesC= resultadoIC[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+    totalInteresesC=0
+    sumaCargoIC = mysql.connection.cursor()
+    sumaCargoIC.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=36',[idFormato])
+    resultadoIC = sumaCargoIC.fetchone()
+    sumaCargoIC=mysql.connection.cursor()
+    if resultadoIC is not None:
+        sumaCargoInteresesC = resultadoIC[0]
+    else:
+        print("No se encontraron resultados.") 
+    if sumaAbonoInteresesC is not None and sumaCargoInteresesC is not None:
+        totalInteresesC=sumaAbonoInteresesC - sumaCargoInteresesC
+    else:
+        print("Uno o ambos valores son None.")
+
     return render_template('vwEsquemaT.html',
                            conjuntoDatos=conjuntoDatos, 
                            consulta=consulta,
+                           idFormato= idFormato,
+
                            sumaAbonoBanco=sumaAbonoBanco,
                            sumaCargoBanco=sumaCargoBanco,
-                           totalBanco=totalBanco)
+                           totalBanco=totalBanco,
+
+                           sumaAbonoInversiones=sumaAbonoInversiones,
+                           sumaCargoInversiones=sumaCargoInversiones,
+                           totalInversiones=totalInversiones,
+
+                           sumaAbonoCajas=sumaAbonoCajas,
+                           sumaCargoCajas=sumaCargoCajas,
+                           totalCajas=totalCajas,
+                           
+                           sumaAbonoAlmacenes =sumaAbonoAlmacenes ,
+                           sumaCargoAlmacenes =sumaCargoAlmacenes ,
+                           totalAlmacenes =totalAlmacenes ,
+                           
+                           sumaAbonoClientes =sumaAbonoClientes ,
+                           sumaCargoClientes =sumaCargoClientes ,
+                           totalClientes =totalClientes ,
+
+                           sumaAbonoDocumentosC =sumaAbonoDocumentosC ,
+                           sumaCargoDocumentosC =sumaCargoDocumentosC ,
+                           totalDocumentosC =totalDocumentosC ,
+
+                           sumaAbonoDeudoresD =sumaAbonoDeudoresD ,
+                           sumaCargoDeudoresD =sumaCargoDeudoresD ,
+                           totalDeudoresD =totalDeudoresD ,
+
+                           sumaAbonoAnticipoP =sumaAbonoAnticipoP ,
+                           sumaCargoAnticipoP =sumaCargoAnticipoP ,
+                           totalAnticipoP =totalAnticipoP ,
+
+                           sumaAbonoTerreno =sumaAbonoTerreno ,
+                           sumaCargoTerreno =sumaCargoTerreno ,
+                           totalTerreno =totalTerreno ,
+
+                           sumaAbonoEdificios =sumaAbonoEdificios ,
+                           sumaCargoEdificios =sumaCargoEdificios ,
+                           total=totalEdificios ,
+
+                           sumaAbonoMobiliarios=sumaAbonoMobiliarios,
+                           sumaCargoMobiliarios=sumaCargoMobiliarios,
+                           totalMobiliarios=totalMobiliarios,
+
+                           sumaAbonoEquipoC=sumaAbonoEquipoC,
+                           sumaCargoEquipoC=sumaCargoEquipoC,
+                           totalEquipoC=totalEquipoC,
+
+                           sumaAbonoEquipoE=sumaAbonoEquipoE,
+                           sumaCargoEquipoE=sumaCargoEquipoE,
+                           totalEquipoE=totalEquipoE,
+
+                           sumaAbonoDepositoG=sumaAbonoDepositoG,
+                           sumaCargoDepositoG=sumaCargoDepositoG,
+                           totalDepositoG=totalDepositoG,
+
+                           sumaAbonoInversionP=sumaAbonoInversionP,
+                           sumaCargoInversionP=sumaCargoInversionP,
+                           totalInversionP=totalInversionP,
+
+                           sumaAbonoGastosI=sumaAbonoGastosI,
+                           sumaCargoGastosI=sumaCargoGastosI,
+                           totalGastosI=totalGastosI,
+
+                           sumaAbonoGastosE=sumaAbonoGastosE,
+                           sumaCargoGastosE=sumaCargoGastosE,
+                           totalGastosE=totalGastosE,
+
+                           sumaAbonoGastosM=sumaAbonoGastosM,
+                           sumaCargoGastosM=sumaCargoGastosM,
+                           totalGastosM=totalGastosM,
+
+                           sumaAbonoGastosO=sumaAbonoGastosO,
+                           sumaCargoGastosO=sumaCargoGastosO,
+                           totalGastosO=totalGastosO,
+
+                           sumaAbonoGastosIn=sumaAbonoGastosIn,
+                           sumaCargoGastosIn=sumaCargoGastosIn,
+                           totalGastosIn=totalGastosIn,
+
+                           sumaAbonoPapeleria=sumaAbonoPapeleria,
+                           sumaCargoPapeleria=sumaCargoPapeleria,
+                           totalPapeleria=totalPapeleria,
+
+                           sumaAbonoPropaganda=sumaAbonoPropaganda,
+                           sumaCargoPropaganda=sumaCargoPropaganda,
+                           totalPropaganda=totalPropaganda,
+
+                           sumaAbonoPrimasS=sumaAbonoPrimasS,
+                           sumaCargoPrimasS=sumaCargoPrimasS,
+                           totalPrimasS=totalPrimasS,
+
+                           sumaAbonoRentasP=sumaAbonoRentasP,
+                           sumaCargoRentasP=sumaCargoRentasP,
+                           totalRentasP=totalRentasP,
+
+                           sumaAbonoInteresesP=sumaAbonoInteresesP,
+                           sumaCargoInteresesP=sumaCargoInteresesP,
+                           totalInteresesP=totalInteresesP,
+
+                           sumaAbonoProveedores =sumaAbonoProveedores ,
+                           sumaCargoProveedores =sumaCargoProveedores ,
+                           totalProveedores =totalProveedores ,
+
+                           sumaAbonoDocumentosP=sumaAbonoDocumentosP,
+                           sumaCargoDocumentosP=sumaCargoDocumentosP,
+                           totalDocumentosP=totalDocumentosP,
+
+                           sumaAbonoAcreedoresD=sumaAbonoAcreedoresD,
+                           sumaCargoAcreedoresD=sumaCargoAcreedoresD,
+                           totalAcreedoresD=totalAcreedoresD,
+
+                           sumaAbonoAnticipoC=sumaAbonoAnticipoC,
+                           sumaCargoAnticipoC=sumaCargoAnticipoC,
+                           totalAnticipoC=totalAnticipoC,
+
+                           sumaAbonoGastosP=sumaAbonoGastosP,
+                           sumaCargoGastosP=sumaCargoGastosP,
+                           totalGastosP=totalGastosP,
+
+                            sumaAbonoImpuestosP=sumaAbonoImpuestosP,
+                           sumaCargoImpuestosP=sumaCargoImpuestosP,
+                           totalImpuestosP=totalImpuestosP,
+
+                           sumaAbonoHipotecas=sumaAbonoHipotecas,
+                           sumaCargoHipotecas=sumaCargoHipotecas,
+                           totalHipotecas=totalHipotecas,
+
+                           sumaAbonoDocumentosPL=sumaAbonoDocumentosPL,
+                           sumaCargoDocumentosPL=sumaCargoDocumentosPL,
+                           totalDocumentosPL=totalDocumentosPL,
+
+                            sumaAbonoCuentasPL=sumaAbonoCuentasPL,
+                           sumaCargoCuentasPL=sumaCargoCuentasPL,
+                           totalCuentasPL=totalCuentasPL,
+
+                           sumaAbonoRentasC=sumaAbonoRentasC,
+                           sumaCargoRentasC=sumaCargoRentasC,
+                           totalRentasC=totalRentasC,
+
+                           sumaAbonoInteresesC=sumaAbonoInteresesC,
+                           sumaCargoInteresesC=sumaCargoInteresesC,
+                           totalInteresesC=totalInteresesC
+
+                           )
+
+@app.route('/vw_insertEsquema/<idFormato>',methods=['POST'])
+def vwInsertEsquema(idFormato):
+    if request.method == ('POST'):
+        totalCajas = request.form['totalCajas']
+        totalBancos = request.form['totalBancos']
+        totalInversiones = request.form['totalInversiones']
+
+        totalAlmacenes = request.form['totalAlmacenes ']
+        totalClientes = request.form['totalClientes ']
+        totalDocumentosC = request.form['totalDocumentosC ']
+
+        totalDeudoresD = request.form['totalDeudoresD ']
+        totalAnticipoP = request.form['totalAnticipoP']
+        totalTerreno = request.form['totalTerreno ']
+        totalEdificios = request.form['totalEdificios ']
+
+        totalMobiliarios = request.form['totalMobiliarios']
+        totalEquipoC = request.form['totalEquipoC']
+        totalEquipoE = request.form['totalEquipoE']
+
+        totalDepositoG = request.form['totalDepositoG']
+        totalInversionP = request.form['totalInversionP']
+        totalGastosI = request.form['totalGastosI']
+
+        totalGastosE = request.form['totalGastosE']
+        totalGastosM = request.form['totalGastosM']
+        totalGastosO = request.form['totalGastosO']
+        totalGastosIn = request.form['totalGastosIn']
+
+        totalPapeleria = request.form['totalPapeleria']
+        totalPropaganda = request.form['totalPropaganda']
+        totalPrimasS = request.form['totalPrimasS']
+
+        totalRentasP = request.form['totalRentasP']
+        totalInteresesP = request.form['totalInteresesP']
+        totalProveedores = request.form['totalProveedores']
+
+        totalDocumentosP = request.form['totalDocumentosP']
+        totalAcreedoresD = request.form['totalAcreedoresD']
+        totalAnticipoC = request.form['totalAnticipoC']
+        totalGastosP = request.form['totalGastosP']
+
+        totalImpuestosP = request.form['totalImpuestosP']
+        totalHipotecas = request.form['totalHipotecas']
+        totalDocumentosPL = request.form['totalDocumentosPL']
+
+        totalCuentasPL = request.form['totalCuentasPL']
+        totalRentasC = request.form['totalRentasC']
+        totalInteresesC = request.form['totalInteresesC']
+       
+        cur1=mysql.connection.cursor()
+        cur1.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalBancos,2,idFormato])
+        mysql.connection.commit()
+        return render_template('vwInsertBalance.html', idFormato=idFormato) 
+
+
 
 if __name__ == '__main__':
     app.add_url_rule('/',view_func=index)
