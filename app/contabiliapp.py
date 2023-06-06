@@ -68,16 +68,43 @@ def vwEsquemaT(idFormato):
     dataEsquemasT.execute('SELECT datos.id_dato, datos.monto, datos.deberHaber_id, conceptos.id_Concepto FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s',[idFormato])
     mysql.connection.commit()
     conjuntoDatos = dataEsquemasT.fetchall()
-    
+
     cur=mysql.connection.cursor()
     cur.execute('SELECT * FROM formatos WHERE id_formato= %s',[idFormato])
     consulta = cur.fetchone()
     cur=mysql.connection.cursor()
 
-    datos2=conjuntoDatos[2]
-    print(datos2)
-    
-    return render_template('vwEsquemaT.html',conjuntoDatos=conjuntoDatos, consulta=consulta,datos2=datos2)
+    #SUMAS DE BANCOS
+    sumaAbonoBa = mysql.connection.cursor()
+    sumaAbonoBa.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=1 AND datos.concepto_id=2',[idFormato])
+    resultado = sumaAbonoBa.fetchone()
+    sumaAbonoBa=mysql.connection.cursor()
+
+    if resultado is not None:#Comprueba si viene vacio
+        sumaAbonoBanco = resultado[0]  # Acceder al valor de la suma
+    else:
+        print("No se encontraron resultados.")
+
+    sumaCargoBa = mysql.connection.cursor()
+    sumaCargoBa.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=2',[idFormato])
+    resultado = sumaCargoBa.fetchone()
+    sumaCargoBa=mysql.connection.cursor()
+    if resultado is not None:
+        sumaCargoBanco = resultado[0]
+    else:
+        print("No se encontraron resultados.") 
+
+    totalBanco=sumaAbonoBanco-sumaCargoBanco #RESTA DE ABONO Y CARGO
+    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!HACER UN INSERT EN LA TABLA TOTALES EN EL CAMPO TOTAL PONDREMOS LO QUE VALGA LA VARIABLE totalBanco!!!!!!!!!!!!!!!!!!!!!!!
+
+
+    #AQUI DEBERIA INICIAR SUMA DE INVERSIONES TEMPORALES
+    return render_template('vwEsquemaT.html',
+                           conjuntoDatos=conjuntoDatos, 
+                           consulta=consulta,
+                           sumaAbonoBanco=sumaAbonoBanco,
+                           sumaCargoBanco=sumaCargoBanco,
+                           totalBanco=totalBanco)
 
 if __name__ == '__main__':
     app.add_url_rule('/',view_func=index)

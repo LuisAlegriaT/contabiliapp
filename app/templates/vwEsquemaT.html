@@ -4,10 +4,10 @@
     <div class="row">
       <div class="col">
 
-        <input type="" value="FORMATO NO. {{consulta.0}}" disabled>
+        <span>FORMATO NO. </span> <input type="" value="{{consulta.0}}" disabled>
       </div>
       <div class="col">
-        <input type="text" value="BALANCE {{consulta.1}}" disabled  >
+        <span>NOMBRE DEL BALANCE: </span><input type="text" value="{{consulta.1}}" disabled>
       </div>
     </div>
 </div>
@@ -39,7 +39,7 @@
                     {% if registro[2]==1 %}<!--ESTE IF ES PARA COMPROBAR HABER|DEBER-->
                       <tr>
                         <th scope="col">{{registro[0]}}</th>
-                        <th scope="col"  >$ {{registro[1]}}</th>
+                        <th scope="col">$ {{registro[1]}}</th>
                         <th scope="col">$ 00.00</th>
                         <th scope="col">##</th>
                       </tr>
@@ -47,7 +47,7 @@
                       <tr>
                         <th scope="col">##</th>
                         <th scope="col">$ 00.00</th>
-                        <th scope="col" >$ {{registro[1]}}</th>
+                        <th scope="col">${{registro[1]}}</th>
                         <th scope="col">{{registro[0]}}</th>
                       </tr>
                     {% endif %}
@@ -89,7 +89,7 @@
               <tr>
                 <th scope="col">##</th>
                 <th scope="col">$ 00.00</th>
-                <th scope="col" >{{registro[1]}}</th>
+                <th scope="col">$ {{registro[1]}}</th>
                 <th scope="col">{{registro[0]}}</th>
               </tr>
               
@@ -98,7 +98,19 @@
               
               {%endfor%}
               
-              
+              <tr>
+                <th>TOTAL ABONO</th>
+                <th><span>$ </span>{{sumaAbonoBanco}}</th>
+                <th><span>$ </span>{{sumaCargoBanco}}</th>
+                <th>TOTAL CARGO</th>
+              </tr>
+              <tr>
+                <th></th>
+                <td colspan="2">
+                  <span>$ </span>{{totalBanco}}
+                </td>
+                <th></th>
+              </tr>
               
             </tbody>
           </table>
