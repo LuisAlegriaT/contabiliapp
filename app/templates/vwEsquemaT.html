@@ -21,7 +21,7 @@
         <table class="table">
             <thead>
               <tr>
-                <th scope="col" colspan="4">CAJA</th>
+                <th scope="col" colspan="4" value="1">CAJA</th>
               </tr>
             </thead>
             
@@ -59,24 +59,16 @@
                   <th><span>$ </span>{{sumaCargoCajas}}</th>
                   <th>TOTAL CARGO</th>
                 </tr>
-                {% if totalCajas %}
-                  <tr>
-                    <th></th>
-                    <td colspan="2" name="totalCajas">
-                      <span>$ 0.00</span> 
-                    </td>
-                    <th></th>
-                  </tr>
-                {% else %}
-                  <tr>
-                    <th></th>
-                    <td colspan="2" name="totalCajas">
-                      <span>$ </span><p>{{totalCajas}}</p>
-                    </td>
-                    <th></th>
-                  </tr>
-                  
-                {% endif %}  
+                <tr>
+                  <th></th>
+                  <td colspan="2" >
+                    <select name="totalCajas1"  id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalCajas}}" >$ {{totalCajas}}</option>
+                   
+                  </td>
+                  <th></th>
+                </tr>
+                   
 
               </tbody>
           </table>
@@ -130,9 +122,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalBanco">
-                  <span>$</span>{{totalBanco}}
+                <td colspan="2">
+                  <select name="totalBancos" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalBancos}}">$ {{totalBancos}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
               
@@ -189,9 +184,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalInversiones">
-                  <span>$ </span>{{totalInversiones}}
+                <td colspan="2">
+                  <select name="totalInversiones" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalInversiones}}">$ {{totalInversiones}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -245,9 +243,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalAlmacenes">
-                  <span>$ </span>{{totalAlmacenes}}
+                <td colspan="2">
+                  <select name="totalAlmacenes" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalAlmacenes}}">$ {{totalAlmacenes}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -301,9 +302,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalClientes">
-                  <span>$ </span>{{totalClientes}}
+                <td colspan="2">
+                  <select name="totalClientes" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalClientes}}">$ {{totalClientes}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -357,9 +361,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalDocumentosC">
-                  <span>$ </span>{{totalDocumentosC}}
+                <td colspan="2">
+                  <select name="totalDocumentosC" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalDocumentosC}}">$ {{totalDocumentosC}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -412,9 +419,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalDeudoresD">
-                  <span>$ </span>{{totalDeudoresD}}
+                <td colspan="2">
+                  <select name="totalDeudoresD" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalDeudoresD}}">$ {{totalDeudoresD}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -467,9 +477,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalAnticipoP">
-                  <span>$ </span>{{totalAnticipoP}}
+                <td colspan="2">
+                  <select name="totalAnticipoP" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalAnticipoP}}">$ {{totalAnticipoP}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -522,9 +535,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalTerreno">
-                  <span>$ </span>{{totalTerreno}}
+                <td colspan="2">
+                  <select name="totalTerreno" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalTerreno}}">$ {{totalTerreno}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -577,9 +593,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalEdificios">
-                  <span>$ </span>{{totalEdificios}}
+                <td colspan="2">
+                  <select name="totalEdificios" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalEdificios}}">$ {{totalEdificios}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -633,9 +652,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalMobiliarios">
-                  <span>$ </span>{{totalMobiliarios}}
+                <td colspan="2">
+                  <select name="totalMobiliarios" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalMobiliarios}}">$ {{totalMobiliarios}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -689,9 +711,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalEquipoC">
-                  <span>$ </span>{{totalEquipoC}}
+                <td colspan="2">
+                  <select name="totalEquipoC" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalEquipoC}}">$ {{totalEquipoC}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -745,9 +770,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalEquipoE">
-                  <span>$ </span>{{totalEquipoE}}
+                <td colspan="2">
+                  <select name="totalEquipoE" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalEquipoE}}">$ {{totalEquipoE}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -801,9 +829,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalDepositoG">
-                  <span>$ </span>{{totalDepositoG}}
+                <td colspan="2">
+                  <select name="totalDepositoG" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalDepositoG}}">$ {{totalDepositoG}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -857,9 +888,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalInversionP">
-                  <span>$ </span>{{totalInversionP}}
+                <td colspan="2">
+                  <select name="totalInversionP" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalInversionP}}">$ {{totalInversionP}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -913,9 +947,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalGastosI">
-                  <span>$ </span>{{totalGastosI}}
+                <td colspan="2">
+                  <select name="totalGastosI" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalGastosI}}">$ {{totalGastosI}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -969,9 +1006,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalGastosE">
-                  <span>$ </span>{{totalGastosE}}
+                <td colspan="2">
+                  <select name="totalGastosE" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalGastosE}}">$ {{totalGastosE}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -1025,9 +1065,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalGastosM">
-                  <span>$ </span>{{totalGastosM}}
+                <td colspan="2">
+                  <select name="totalGastosM" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalGastosM}}">$ {{totalGastosM}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -1081,9 +1124,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalGastosO">
-                  <span>$ </span>{{totalGastosO}}
+                <td colspan="2">
+                  <select name="totalGastosO" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalGastosO}}">$ {{totalGastosO}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -1138,9 +1184,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalGastosIn">
-                  <span>$ </span>{{totalGastosIn}}
+                <td colspan="2">
+                  <select name="totalGastosIn" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalGastosIn}}">$ {{totalGastosIn}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -1195,9 +1244,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalPapeleria">
-                  <span>$ </span>{{totalPapeleria}}
+                <td colspan="2">
+                  <select name="totalPapeleria" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalPapeleria}}">$ {{totalPapeleria}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -1251,9 +1303,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalPropaganda">
-                  <span>$ </span>{{totalPropaganda}}
+                <td colspan="2">
+                  <select name="totalPropaganda" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalPropaganda}}">$ {{totalPropaganda}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -1307,9 +1362,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalPrimasS">
-                  <span>$ </span>{{totalPrimasS}}
+                <td colspan="2">
+                  <select name="totalPrimasS" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalPrimasS}}">$ {{totalPrimasS}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -1363,9 +1421,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalRentasP">
-                  <span>$ </span>{{totalRentasP}}
+                <td colspan="2">
+                  <select name="totalRentasP" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalRentasP}}">$ {{totalRentasP}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -1419,9 +1480,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalInteresesP">
-                  <span>$ </span>{{totalInteresesP}}
+                <td colspan="2">
+                  <select name="totalInteresesP" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalInteresesP}}">$ {{totalInteresesP}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -1475,9 +1539,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalProveedores ">
-                  <span>$ </span>{{totalProveedores}}
+                <td colspan="2">
+                  <select name="totalProveedores" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalProveedores}}">$ {{totalProveedores}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -1531,9 +1598,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalDocumentosP">
-                  <span>$ </span>{{totalDocumentosP}}
+                <td colspan="2">
+                  <select name="totalDocumentosP" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalDocumentosP}}">$ {{totalDocumentosP}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -1587,9 +1657,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalAcreedoresD">
-                  <span>$ </span>{{totalAcreedoresD}}
+                <td colspan="2">
+                  <select name="totalAcreedoresD" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalAcreedoresD}}">$ {{totalAcreedoresD}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -1643,9 +1716,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalAnticipoC">
-                  <span>$ </span>{{totalAnticipoC}}
+                <td colspan="2">
+                  <select name="totalAnticipoC" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalAnticipoC}}">$ {{totalAnticipoC}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -1699,9 +1775,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalGastosP">
-                  <span>$ </span>{{totalGastosP}}
+                <td colspan="2">
+                  <select name="totalGastosP" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalGastosP}}">$ {{totalGastosP}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -1755,9 +1834,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalImpuestosP">
-                  <span>$ </span>{{totalImpuestosP}}
+                <td colspan="2">
+                  <select name="totalImpuestosP" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalImpuestosP}}">$ {{totalImpuestosP}}</option>
+                
                 </td>
+               
                 <th></th>
               </tr>
 
@@ -1811,9 +1893,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalHipotecas">
-                  <span>$ </span>{{totalHipotecas}}
+                <td colspan="2">
+                  <select name="totalHipotecas" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalHipotecas}}">$ {{totalHipotecas}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -1867,9 +1952,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalDocumentosPL">
-                  <span>$ </span>{{totalDocumentosPL}}
+                <td colspan="2">
+                  <select name="totalDocumentosPL" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalDocumentosPL}}">$ {{totalDocumentosPL}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -1923,9 +2011,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalCuentasPL">
-                  <span>$ </span>{{totalCuentasPL}}
+                <td colspan="2">
+                  <select name="totalCuentasPL" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalCuentasPL}}">$ {{totalCuentasPL}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -1979,9 +2070,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalRentasC">
-                  <span>$ </span>{{totalRentasC}}
+                <td colspan="2">
+                  <select name="totalRentasC" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalRentasC}}">$ {{totalRentasC}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 
@@ -2035,9 +2129,12 @@
               </tr>
               <tr>
                 <th></th>
-                <td colspan="2" name="totalInteresesC">
-                  <span>$ </span>{{totalInteresesC}}
+                <td colspan="2">
+                  <select name="totalInteresesC" id="" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                    <option value="{{totalInteresesC}}">$ {{totalInteresesC}}</option>
+                
                 </td>
+                
                 <th></th>
               </tr>
 

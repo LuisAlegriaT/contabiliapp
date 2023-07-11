@@ -89,12 +89,13 @@ def vwEsquemaT(idFormato):
     sumaCargoBa.execute('SELECT SUM(datos.monto) FROM formatos INNER JOIN datos ON formatos.id_formato = datos.formato_id INNER JOIN conceptos ON datos.concepto_id=conceptos.id_concepto WHERE formatos.id_formato=%s AND datos.deberHaber_id=2 AND datos.concepto_id=2',[idFormato])
     resultado = sumaCargoBa.fetchone()
     sumaCargoBa=mysql.connection.cursor()
+    totalBancos = 0 
     if resultado is not None:
         sumaCargoBanco = resultado[0]
     else:
         print("No se encontraron resultados.") 
     if sumaAbonoBanco is not None and sumaCargoBanco is not None:
-        totalBanco=sumaAbonoBanco-sumaCargoBanco #RESTA DE ABONO Y CARGO
+        totalBancos=sumaAbonoBanco-sumaCargoBanco #RESTA DE ABONO Y CARGO
 
     else:
         print("Uno o ambos valores son None.")
@@ -965,7 +966,7 @@ def vwEsquemaT(idFormato):
 
                            sumaAbonoBanco=sumaAbonoBanco,
                            sumaCargoBanco=sumaCargoBanco,
-                           totalBanco=totalBanco,
+                           totalBancos=totalBancos,
 
                            sumaAbonoInversiones=sumaAbonoInversiones,
                            sumaCargoInversiones=sumaCargoInversiones,
@@ -1112,18 +1113,19 @@ def vwEsquemaT(idFormato):
 @app.route('/vw_insertEsquema/<idFormato>',methods=['POST'])
 def vwInsertEsquema(idFormato):
     if request.method == ('POST'):
-        totalCajas = request.form['totalCajas']
+        
+        totalCajas = request.form['totalCajas1']
         totalBancos = request.form['totalBancos']
         totalInversiones = request.form['totalInversiones']
-
-        totalAlmacenes = request.form['totalAlmacenes ']
-        totalClientes = request.form['totalClientes ']
-        totalDocumentosC = request.form['totalDocumentosC ']
-
-        totalDeudoresD = request.form['totalDeudoresD ']
+        
+        totalAlmacenes = request.form['totalAlmacenes']
+        totalClientes = request.form['totalClientes']
+        totalDocumentosC = request.form['totalDocumentosC']
+        
+        totalDeudoresD = request.form['totalDeudoresD']
         totalAnticipoP = request.form['totalAnticipoP']
-        totalTerreno = request.form['totalTerreno ']
-        totalEdificios = request.form['totalEdificios ']
+        totalTerreno = request.form['totalTerreno']
+        totalEdificios = request.form['totalEdificios']
 
         totalMobiliarios = request.form['totalMobiliarios']
         totalEquipoC = request.form['totalEquipoC']
@@ -1132,12 +1134,12 @@ def vwInsertEsquema(idFormato):
         totalDepositoG = request.form['totalDepositoG']
         totalInversionP = request.form['totalInversionP']
         totalGastosI = request.form['totalGastosI']
-
+        
         totalGastosE = request.form['totalGastosE']
         totalGastosM = request.form['totalGastosM']
         totalGastosO = request.form['totalGastosO']
         totalGastosIn = request.form['totalGastosIn']
-
+        
         totalPapeleria = request.form['totalPapeleria']
         totalPropaganda = request.form['totalPropaganda']
         totalPrimasS = request.form['totalPrimasS']
@@ -1150,19 +1152,205 @@ def vwInsertEsquema(idFormato):
         totalAcreedoresD = request.form['totalAcreedoresD']
         totalAnticipoC = request.form['totalAnticipoC']
         totalGastosP = request.form['totalGastosP']
-
+        
         totalImpuestosP = request.form['totalImpuestosP']
         totalHipotecas = request.form['totalHipotecas']
         totalDocumentosPL = request.form['totalDocumentosPL']
-
+        
         totalCuentasPL = request.form['totalCuentasPL']
         totalRentasC = request.form['totalRentasC']
         totalInteresesC = request.form['totalInteresesC']
-       
-        cur1=mysql.connection.cursor()
-        cur1.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalBancos,2,idFormato])
-        mysql.connection.commit()
-        return render_template('vwInsertBalance.html', idFormato=idFormato) 
+
+        if totalCajas != 0 or totalBancos != 0 or totalInversiones != 0 or totalAlmacenes != 0 or totalClientes != 0 or totalDocumentosC or totalDeudoresD != 0 or totalAnticipoP != 0 or totalTerreno != 0 or totalEdificios != 0 or totalMobiliarios !=0 or totalEquipoC != 0 or totalEquipoE != 0 or totalDepositoG != 0 or totalInversionP !=0 or totalGastosI != 0 or totalGastosE != 0 or totalGastosM !=0 or totalGastosO != 0 or totalGastosIn != 0 or totalPapeleria != 0 or totalPropaganda != 0 or totalPrimasS != 0 or totalRentasP != 0 or totalInteresesP != 0 or totalProveedores != 0 or totalDocumentosP != 0 or totalAcreedoresD != 0 or totalAnticipoC != 0 or totalGastosP != 0 or totalImpuestosP != 0 or totalHipotecas != 0 or totalDocumentosPL != 0 or totalCuentasPL != 0 or totalRentasC != 0 or totalInteresesC != 0:
+            cur1=mysql.connection.cursor()
+            cur1.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalCajas,1,idFormato])
+            mysql.connection.commit()
+
+            cur2=mysql.connection.cursor()
+            cur2.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalBancos,2,idFormato])
+            mysql.connection.commit()
+        
+            cur3=mysql.connection.cursor()
+            cur3.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalInversiones,3,idFormato])
+            mysql.connection.commit()
+
+            cur4=mysql.connection.cursor()
+            cur4.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalAlmacenes,4,idFormato])
+            mysql.connection.commit()
+        
+            cur5=mysql.connection.cursor()
+            cur5.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalClientes,5,idFormato])
+            mysql.connection.commit()
+        
+            cur6=mysql.connection.cursor()
+            cur6.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalDocumentosC,6,idFormato])
+            mysql.connection.commit()
+
+            cur7=mysql.connection.cursor()
+            cur7.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalDeudoresD,7,idFormato])
+            mysql.connection.commit()
+        
+            cur8=mysql.connection.cursor()
+            cur8.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalAnticipoP,8,idFormato])
+            mysql.connection.commit()
+        
+            cur9=mysql.connection.cursor()
+            cur9.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalTerreno,9,idFormato])
+            mysql.connection.commit()
+        
+            cur10=mysql.connection.cursor()
+            cur10.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalEdificios,10,idFormato])
+            mysql.connection.commit()
+        
+            cur11=mysql.connection.cursor()
+            cur11.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalMobiliarios,11,idFormato])
+            mysql.connection.commit()
+
+            cur12=mysql.connection.cursor()
+            cur12.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalEquipoC,12,idFormato])
+            mysql.connection.commit()
+      
+            cur13=mysql.connection.cursor()
+            cur13.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalEquipoE,13,idFormato])
+            mysql.connection.commit()
+        
+            cur14=mysql.connection.cursor()
+            cur14.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalDepositoG,14,idFormato])
+            mysql.connection.commit()
+        
+            cur15=mysql.connection.cursor()
+            cur15.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalInversionP,15,idFormato])
+            mysql.connection.commit()
+        
+            cur16=mysql.connection.cursor()
+            cur16.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalGastosI,16,idFormato])
+            mysql.connection.commit()
+        
+            cur17=mysql.connection.cursor()
+            cur17.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalGastosE,17,idFormato])
+            mysql.connection.commit()
+        
+            cur18=mysql.connection.cursor()
+            cur18.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalGastosM,18,idFormato])
+            mysql.connection.commit()
+        
+            cur19=mysql.connection.cursor()
+            cur19.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalGastosO,19,idFormato])
+            mysql.connection.commit()
+        
+            cur20=mysql.connection.cursor()
+            cur20.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalGastosIn,20,idFormato])
+            mysql.connection.commit()
+            
+            cur21=mysql.connection.cursor()
+            cur21.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalPapeleria,21,idFormato])
+            mysql.connection.commit()
+        
+            cur22=mysql.connection.cursor()
+            cur22.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalPropaganda,22,idFormato])
+            mysql.connection.commit()
+        
+            cur23=mysql.connection.cursor()
+            cur23.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalPrimasS,23,idFormato])
+            mysql.connection.commit()
+        
+            cur24=mysql.connection.cursor()
+            cur24.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalRentasP,24,idFormato])
+            mysql.connection.commit()
+        
+            cur25=mysql.connection.cursor()
+            cur25.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalInteresesP,25,idFormato])
+            mysql.connection.commit()
+        
+            cur26=mysql.connection.cursor()
+            cur26.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalProveedores,26,idFormato])
+            mysql.connection.commit()
+        
+            cur27=mysql.connection.cursor()
+            cur27.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalDocumentosP,27,idFormato])
+            mysql.connection.commit()
+        
+            cur28=mysql.connection.cursor()
+            cur28.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalAcreedoresD,28,idFormato])
+            mysql.connection.commit()
+        
+            cur29=mysql.connection.cursor()
+            cur29.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalAnticipoC,29,idFormato])
+            mysql.connection.commit()
+        
+            cur30=mysql.connection.cursor()
+            cur30.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalGastosP,30,idFormato])
+            mysql.connection.commit()
+
+            cur31=mysql.connection.cursor()
+            cur31.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalImpuestosP,31,idFormato])
+            mysql.connection.commit()
+
+            cur32=mysql.connection.cursor()
+            cur32.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalHipotecas,32,idFormato])
+            mysql.connection.commit()
+        
+            cur33=mysql.connection.cursor()
+            cur33.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalDocumentosPL,33,idFormato])
+            mysql.connection.commit()
+        
+            cur34=mysql.connection.cursor()
+            cur34.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalCuentasPL,34,idFormato])
+            mysql.connection.commit()
+        
+            cur35=mysql.connection.cursor()
+            cur35.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalRentasC,35,idFormato])
+            mysql.connection.commit()
+        
+            cur36=mysql.connection.cursor()
+            cur36.execute('INSERT INTO totales(total,concepto_id2,formato_id2) values(%s,%s,%s)',[totalInteresesC,36,idFormato])
+            mysql.connection.commit()
+
+        return redirect(url_for('vwSelectBalance',idFormato=idFormato)) 
+
+@app.route('/vw_SelectBalance/<idFormato>')
+def vwSelectBalance(idFormato):
+    cur=mysql.connection.cursor()
+    cur.execute('SELECT totales.total, conceptos.tipoConcepto, pasivoactivos.descripcion, totales.formato_id2 FROM totales JOIN conceptos ON totales.concepto_id2 = conceptos.id_concepto JOIN pasivoactivos ON conceptos.pasivoActivo_id = pasivoactivos.id_pasivoActivo WHERE pasivoactivos.id_pasivoActivo= 1 AND totales.formato_id2 LIKE %s',[idFormato])
+    consulta = cur.fetchall()
+
+    sumaAbonoAC = mysql.connection.cursor()
+    sumaAbonoAC.execute('SELECT SUM(totales.total) FROM totales JOIN conceptos ON totales.concepto_id2 = conceptos.id_concepto JOIN pasivoactivos ON conceptos.pasivoActivo_id = pasivoactivos.id_pasivoActivo WHERE pasivoactivos.id_pasivoActivo= 1 AND totales.formato_id2 LIKE %s',[idFormato])
+    resultadoAC = sumaAbonoAC.fetchone()
+
+    cur1=mysql.connection.cursor()
+    cur1.execute('SELECT totales.total, conceptos.tipoConcepto, pasivoactivos.descripcion, totales.formato_id2 FROM totales JOIN conceptos ON totales.concepto_id2 = conceptos.id_concepto JOIN pasivoactivos ON conceptos.pasivoActivo_id = pasivoactivos.id_pasivoActivo WHERE pasivoactivos.id_pasivoActivo= 2 AND totales.formato_id2 LIKE %s',[idFormato])
+    consulta1 = cur1.fetchall()
+
+    sumaAbonoAF = mysql.connection.cursor()
+    sumaAbonoAF.execute('SELECT SUM(totales.total) FROM totales JOIN conceptos ON totales.concepto_id2 = conceptos.id_concepto JOIN pasivoactivos ON conceptos.pasivoActivo_id = pasivoactivos.id_pasivoActivo WHERE pasivoactivos.id_pasivoActivo= 2 AND totales.formato_id2 LIKE %s',[idFormato])
+    resultadoAF = sumaAbonoAF.fetchone()
+    sumaAF= resultadoAF[0]
+    sumaAC= resultadoAC[0]
+
+    resultadoA = sumaAF + sumaAC
+
+
+    cur2=mysql.connection.cursor()
+    cur2.execute('SELECT totales.total, conceptos.tipoConcepto, pasivoactivos.descripcion, totales.formato_id2 FROM totales JOIN conceptos ON totales.concepto_id2 = conceptos.id_concepto JOIN pasivoactivos ON conceptos.pasivoActivo_id = pasivoactivos.id_pasivoActivo WHERE pasivoactivos.id_pasivoActivo= 3 AND totales.formato_id2 LIKE %s',[idFormato])
+    consulta2 = cur2.fetchall()
+
+
+
+    cur3=mysql.connection.cursor()
+    cur3.execute('SELECT totales.total, conceptos.tipoConcepto, pasivoactivos.descripcion, totales.formato_id2 FROM totales JOIN conceptos ON totales.concepto_id2 = conceptos.id_concepto JOIN pasivoactivos ON conceptos.pasivoActivo_id = pasivoactivos.id_pasivoActivo WHERE pasivoactivos.id_pasivoActivo= 4 AND totales.formato_id2 LIKE %s',[idFormato])
+    consulta3 = cur3.fetchall()
+    cur4=mysql.connection.cursor()
+    cur4.execute('SELECT totales.total, conceptos.tipoConcepto, pasivoactivos.descripcion, totales.formato_id2 FROM totales JOIN conceptos ON totales.concepto_id2 = conceptos.id_concepto JOIN pasivoactivos ON conceptos.pasivoActivo_id = pasivoactivos.id_pasivoActivo WHERE pasivoactivos.id_pasivoActivo= 5 AND totales.formato_id2 LIKE %s',[idFormato])
+    consulta4 = cur4.fetchall()
+    cur5=mysql.connection.cursor()
+    cur5.execute('SELECT totales.total, conceptos.tipoConcepto, pasivoactivos.descripcion, totales.formato_id2 FROM totales JOIN conceptos ON totales.concepto_id2 = conceptos.id_concepto JOIN pasivoactivos ON conceptos.pasivoActivo_id = pasivoactivos.id_pasivoActivo WHERE pasivoactivos.id_pasivoActivo= 6 AND totales.formato_id2 LIKE %s',[idFormato])
+    consulta5 = cur5.fetchall()
+    cur6=mysql.connection.cursor()
+    cur6.execute('SELECT * FROM formatos WHERE id_formato= %s',[idFormato])
+    consulta6 = cur6.fetchall()
+    return render_template('vwInsertBalance.html',resultadoA= resultadoA, resultadoAC= resultadoAC, resultadoAF= resultadoAF, consulta=consulta,consulta6=consulta6,consulta1=consulta1,consulta3=consulta3, consulta4=consulta4, consulta5=consulta5,consulta2=consulta2, idFormato=idFormato)
+
 
 
 
