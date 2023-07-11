@@ -12,14 +12,16 @@
   </div>
 </div>
 
-
 <div class="container text-center border-primary">
-  <div class="col-6">
-    <div class="p-3">
-      <table class="table" id="miTabla">
+
+ 
+    <div class="row g-3">
+      <div class="col-6">
+        <table class="table">
+
         <thead>
           <tr>
-            <th scope="col" colspan="4">Activo Circulante</th>
+            <th scope="col" colspan="4">ACTIVO CIRCULANTE </th>
           </tr>
         </thead>
     
@@ -45,15 +47,50 @@
 
           </tbody>
         </table>
-
       </div>
-  </div>
+      
+      
+      <div class="col-6">
+        <div class="p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4" value="1">PASIVO CIRCULANTE</th>
+              </tr>
+            </thead>
+      
+      
+            <tbody>
+              {%for consulta3 in consulta3%}
+              <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              <tr>
+                <th scope="col" style="text-align: left;">{{consulta3.1}}</th>
+                <th scope="col" style="text-align: left;">{{consulta3.0}}</th>
+      
+              </tr>
+      
+              {%endfor%}
+              {%for resultadoPC in resultadoPC%}
+              <tr>
+                <th>TOTAL </th>
+                <th><span>$ </span>{{resultadoPC}}</th>
+      
+              </tr>
+              {%endfor%}
+      
+            </tbody>
+          </table>
+      
+        </div>
+      </div> 
+    </div>
+      
       <div class="row g-3">
         <div class="col-6">
           <table class="table">
             <thead>
               <tr>
-                <th scope="col" colspan="4" value="1">Activo Fijo</th>
+                <th scope="col" colspan="4" value="1">ACTIVO FIJO</th>
               </tr>
             </thead>
       
@@ -61,7 +98,7 @@
             <tbody>
               {%for consulta1 in consulta1%}
               <!--ESTE IF ES PARA LOS CONCEPTOS-->
-              <tr >
+              <tr>
                 <th scope="col" style="text-align: left;">{{consulta1.1}}</th>
                 <th scope="col" style="text-align: left;">{{consulta1.0}}</th>
       
@@ -79,10 +116,130 @@
             </tbody>
           </table>
         </div>
+        
+      
+
+        <div class="col-6">
+          <div class="p-3">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col" colspan="4" value="1">PASIVO FIJO</th>
+                </tr>
+              </thead>
+        
+        
+              <tbody>
+                {%for consulta4 in consulta4%}
+                <!--ESTE IF ES PARA LOS CONCEPTOS-->
+                <tr>
+                  <th scope="col" style="text-align: left;">{{consulta4.1}}</th>
+                  <th scope="col" style="text-align: left;">{{consulta4.0}}</th>
+        
+                </tr>
+        
+                {%endfor%}
+                {%for resultadoPF in resultadoPF%}
+                <tr>
+                  <th>TOTAL </th>
+                  <th><span>$ </span>{{resultadoPF}}</th>
+        
+                </tr>
+                {%endfor%}
+        
+              </tbody>
+            </table>
+        
+          </div>
+        </div>
+      </div>
+        
+      
+      
+
+      <div class="row g-3">
+        <div class="col-6">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4" value="1">ACTIVO DIFERIDO</th>
+              </tr>
+            </thead>
+      
+      
+            <tbody>
+              {%for consulta2 in consulta2%}
+              <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              <tr>
+                <th scope="col" style="text-align: left;">{{consulta2.1}}</th>
+                <th scope="col" style="text-align: left;">{{consulta2.0}}</th>
+      
+              </tr>
+      
+              {%endfor%}
+              {%for resultadoAD in resultadoAD%}
+              <tr>
+                <th>TOTAL </th>
+                <th><span>$ </span>{{resultadoAD}}</th>
+      
+              </tr>
+              {%endfor%}
+      
+            </tbody>
+          </table>
+        </div>
+      
+
+      <div class="col-6">
+        <div class="p-3">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4" value="1">PASIVO DIFERIDO</th>
+              </tr>
+            </thead>
+      
+      
+            <tbody>
+              {%for consulta5 in consulta5%}
+              <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              <tr>
+                <th scope="col" style="text-align: left;">{{consulta5.1}}</th>
+                <th scope="col" style="text-align: left;">{{consulta5.0}}</th>
+      
+              </tr>
+      
+              {%endfor%}
+              {%for resultadoPD in resultadoPD%}
+              <tr>
+                <th>TOTAL </th>
+                <th><span>$ </span>{{resultadoPD}}</th>
+      
+              </tr>
+              {%endfor%}
+      
+            </tbody>
+          </table>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="p-3">
+            <table class="table" id="miTabla">
+              <thead>
+                <tr>
+                  <th scope="col" colspan="4">TOTAL DE PASIVOS</th>
+                  <th scope="col">$ {{resultadoP}}</th>
+                </tr>
+              </thead>
+        
+            </table>
+          </div>
+        </div>
       </div>
 
+
+        <div class="row g-3">
           <div class="col-6">
-            <div class="p-3">
               <table class="table" id="miTabla">
                 <thead>
                   <tr>
@@ -91,17 +248,49 @@
                   </tr>
                 </thead>
           
-          
+              </table>
+            </div>
+        
+          </div>
+
+          <div class="row g-3">
+            <div class="col-6">
+              <table class="table" id="miTabla">
+                <thead>
+                  <tr>
+                    <th scope="col" colspan="4">ESTADO DE RESULTADO</th>
+                    
+                  </tr>
+                </thead>
                 <tbody>
-                  
+                  {%for consulta7 in consulta7%}
                   <!--ESTE IF ES PARA LOS CONCEPTOS-->
-                 
-          
+                  <tr>
+                    <th scope="col" style="text-align: left;">{{consulta7.1}}</th>
+                    <th scope="col" style="text-align: left;">{{consulta7.0}}</th>
+                
+                  </tr>
+                
+                  {%endfor%}
+                  {%for consulta8 in consulta8%}
+                  <!--ESTE IF ES PARA LOS CONCEPTOS-->
+                  <tr>
+                    <th scope="col" style="text-align: left;">{{consulta8.1}}</th>
+                    <th scope="col" style="text-align: left;">{{consulta8.0}}</th>
                   
-          
+                  </tr>
+                  
+                  {%endfor%}
+                  
+                
                 </tbody>
               </table>
             </div>
-          </div>
+
+
+
+          
+
+          
 </div>
 {% endblock %}

@@ -1325,31 +1325,75 @@ def vwSelectBalance(idFormato):
     sumaAbonoAF = mysql.connection.cursor()
     sumaAbonoAF.execute('SELECT SUM(totales.total) FROM totales JOIN conceptos ON totales.concepto_id2 = conceptos.id_concepto JOIN pasivoactivos ON conceptos.pasivoActivo_id = pasivoactivos.id_pasivoActivo WHERE pasivoactivos.id_pasivoActivo= 2 AND totales.formato_id2 LIKE %s',[idFormato])
     resultadoAF = sumaAbonoAF.fetchone()
-    sumaAF= resultadoAF[0]
-    sumaAC= resultadoAC[0]
-
-    resultadoA = sumaAF + sumaAC
-
+    
 
     cur2=mysql.connection.cursor()
     cur2.execute('SELECT totales.total, conceptos.tipoConcepto, pasivoactivos.descripcion, totales.formato_id2 FROM totales JOIN conceptos ON totales.concepto_id2 = conceptos.id_concepto JOIN pasivoactivos ON conceptos.pasivoActivo_id = pasivoactivos.id_pasivoActivo WHERE pasivoactivos.id_pasivoActivo= 3 AND totales.formato_id2 LIKE %s',[idFormato])
     consulta2 = cur2.fetchall()
 
+    sumaAbonoAD = mysql.connection.cursor()
+    sumaAbonoAD.execute('SELECT SUM(totales.total) FROM totales JOIN conceptos ON totales.concepto_id2 = conceptos.id_concepto JOIN pasivoactivos ON conceptos.pasivoActivo_id = pasivoactivos.id_pasivoActivo WHERE pasivoactivos.id_pasivoActivo= 3 AND totales.formato_id2 LIKE %s',[idFormato])
+    resultadoAD = sumaAbonoAD.fetchone()
 
+    sumaAF= resultadoAF[0]
+    sumaAC= resultadoAC[0]
+    sumaAD= resultadoAD[0]
+
+    resultadoA = sumaAF + sumaAC + sumaAD
 
     cur3=mysql.connection.cursor()
     cur3.execute('SELECT totales.total, conceptos.tipoConcepto, pasivoactivos.descripcion, totales.formato_id2 FROM totales JOIN conceptos ON totales.concepto_id2 = conceptos.id_concepto JOIN pasivoactivos ON conceptos.pasivoActivo_id = pasivoactivos.id_pasivoActivo WHERE pasivoactivos.id_pasivoActivo= 4 AND totales.formato_id2 LIKE %s',[idFormato])
     consulta3 = cur3.fetchall()
+
+    sumaAbonoPC = mysql.connection.cursor()
+    sumaAbonoPC.execute('SELECT SUM(totales.total) FROM totales JOIN conceptos ON totales.concepto_id2 = conceptos.id_concepto JOIN pasivoactivos ON conceptos.pasivoActivo_id = pasivoactivos.id_pasivoActivo WHERE pasivoactivos.id_pasivoActivo= 4 AND totales.formato_id2 LIKE %s',[idFormato])
+    resultadoPC = sumaAbonoPC.fetchone()
+
     cur4=mysql.connection.cursor()
     cur4.execute('SELECT totales.total, conceptos.tipoConcepto, pasivoactivos.descripcion, totales.formato_id2 FROM totales JOIN conceptos ON totales.concepto_id2 = conceptos.id_concepto JOIN pasivoactivos ON conceptos.pasivoActivo_id = pasivoactivos.id_pasivoActivo WHERE pasivoactivos.id_pasivoActivo= 5 AND totales.formato_id2 LIKE %s',[idFormato])
     consulta4 = cur4.fetchall()
+
+    sumaAbonoPF = mysql.connection.cursor()
+    sumaAbonoPF.execute('SELECT SUM(totales.total) FROM totales JOIN conceptos ON totales.concepto_id2 = conceptos.id_concepto JOIN pasivoactivos ON conceptos.pasivoActivo_id = pasivoactivos.id_pasivoActivo WHERE pasivoactivos.id_pasivoActivo= 5 AND totales.formato_id2 LIKE %s',[idFormato])
+    resultadoPF = sumaAbonoPF.fetchone()
+
     cur5=mysql.connection.cursor()
     cur5.execute('SELECT totales.total, conceptos.tipoConcepto, pasivoactivos.descripcion, totales.formato_id2 FROM totales JOIN conceptos ON totales.concepto_id2 = conceptos.id_concepto JOIN pasivoactivos ON conceptos.pasivoActivo_id = pasivoactivos.id_pasivoActivo WHERE pasivoactivos.id_pasivoActivo= 6 AND totales.formato_id2 LIKE %s',[idFormato])
     consulta5 = cur5.fetchall()
+
+    sumaAbonoPD = mysql.connection.cursor()
+    sumaAbonoPD.execute('SELECT SUM(totales.total) FROM totales JOIN conceptos ON totales.concepto_id2 = conceptos.id_concepto JOIN pasivoactivos ON conceptos.pasivoActivo_id = pasivoactivos.id_pasivoActivo WHERE pasivoactivos.id_pasivoActivo= 6 AND totales.formato_id2 LIKE %s',[idFormato])
+    resultadoPD = sumaAbonoPD.fetchone()
+
+    sumaPF= resultadoPF[0]
+    sumaPC= resultadoPC[0]
+    sumaPD= resultadoPD[0]
+    resultadoP = sumaPF + sumaPC + sumaPD
+
+    cur7=mysql.connection.cursor()
+    cur7.execute('SELECT datos.monto, conceptos.tipoConcepto FROM datos JOIN conceptos ON datos.concepto_id = conceptos.id_concepto JOIN pasivoactivos ON conceptos.pasivoActivo_id = pasivoactivos.id_pasivoActivo WHERE pasivoactivos.id_pasivoActivo= 7 AND datos.formato_id LIKE %s',[idFormato])
+    consulta7 = cur7.fetchall()
+
+    cur8=mysql.connection.cursor()
+    cur8.execute('SELECT datos.monto, conceptos.tipoConcepto FROM datos JOIN conceptos ON datos.concepto_id = conceptos.id_concepto JOIN pasivoactivos ON conceptos.pasivoActivo_id = pasivoactivos.id_pasivoActivo WHERE pasivoactivos.id_pasivoActivo= 8 AND datos.formato_id LIKE %s',[idFormato])
+    consulta8 = cur8.fetchall()
+    
+
     cur6=mysql.connection.cursor()
     cur6.execute('SELECT * FROM formatos WHERE id_formato= %s',[idFormato])
     consulta6 = cur6.fetchall()
-    return render_template('vwInsertBalance.html',resultadoA= resultadoA, resultadoAC= resultadoAC, resultadoAF= resultadoAF, consulta=consulta,consulta6=consulta6,consulta1=consulta1,consulta3=consulta3, consulta4=consulta4, consulta5=consulta5,consulta2=consulta2, idFormato=idFormato)
+
+    
+    
+    return render_template('vwInsertBalance.html',
+                           resultadoA= resultadoA,resultadoP=resultadoP, 
+                           resultadoAC= resultadoAC, resultadoAF= resultadoAF ,resultadoAD= resultadoAD,
+                           resultadoPC= resultadoPC, resultadoPF= resultadoPF ,resultadoPD= resultadoPD,
+                           consulta7=consulta7, consulta8=consulta8,
+                            consulta=consulta,consulta6=consulta6,
+                            consulta1=consulta1,consulta3=consulta3, 
+                            consulta4=consulta4, consulta5=consulta5,
+                            consulta2=consulta2, idFormato=idFormato)
 
 
 
