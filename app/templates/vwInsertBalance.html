@@ -1,10 +1,107 @@
-{%extends 'templateNavBar.html'%}
-{%block content%}
-
+{% extends 'templateNavBar.html' %}
+{% block content %}
 <div class="container text-center">
-    <div class="row">
-      <div class="col">
-        </div>
-  </div>
+  <div class="row">
+    <div class="col">
 
+      <span>FORMATO NO. </span> <input type="" value="{{consulta6.0}}" disabled>
+    </div>
+    <div class="col">
+      <span>NOMBRE DEL BALANCE: </span><input type="text" value="{{consulta6.1}}" disabled>
+    </div>
+  </div>
+</div>
+
+
+<div class="container text-center border-primary">
+  <div class="col-6">
+    <div class="p-3">
+      <table class="table" id="miTabla">
+        <thead>
+          <tr>
+            <th scope="col" colspan="4">Activo Circulante</th>
+          </tr>
+        </thead>
+    
+
+          
+          <tbody>
+            {%for consulta in consulta%}
+             <!--ESTE IF ES PARA LOS CONCEPTOS-->
+            <tr >
+              <th scope="col" style="text-align: left;">{{consulta.1}}</th>
+              <th scope="col" style="text-align: left;">{{consulta.0}}</th>
+              
+            </tr>
+            
+            {%endfor%}
+            {%for resultadoAC in resultadoAC%}
+            <tr>
+              <th>TOTAL </th>
+              <th><span>$ </span>{{resultadoAC}}</th>
+              
+            </tr>
+            {%endfor%}
+
+          </tbody>
+        </table>
+
+      </div>
+  </div>
+      <div class="row g-3">
+        <div class="col-6">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4" value="1">Activo Fijo</th>
+              </tr>
+            </thead>
+      
+      
+            <tbody>
+              {%for consulta1 in consulta1%}
+              <!--ESTE IF ES PARA LOS CONCEPTOS-->
+              <tr >
+                <th scope="col" style="text-align: left;">{{consulta1.1}}</th>
+                <th scope="col" style="text-align: left;">{{consulta1.0}}</th>
+      
+              </tr>
+      
+              {%endfor%}
+              {%for resultadoAF in resultadoAF%}
+              <tr>
+                <th>TOTAL </th>
+                <th><span>$ </span>{{resultadoAF}}</th>
+      
+              </tr>
+              {%endfor%}
+      
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+          <div class="col-6">
+            <div class="p-3">
+              <table class="table" id="miTabla">
+                <thead>
+                  <tr>
+                    <th scope="col" colspan="4">TOTAL DE ACTIVOS</th>
+                    <th scope="col">$ {{resultadoA}}</th>
+                  </tr>
+                </thead>
+          
+          
+                <tbody>
+                  
+                  <!--ESTE IF ES PARA LOS CONCEPTOS-->
+                 
+          
+                  
+          
+                </tbody>
+              </table>
+            </div>
+          </div>
+</div>
 {% endblock %}
