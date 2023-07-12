@@ -2,13 +2,14 @@
 {% block content %}
 <div class="container text-center">
   <div class="row">
+    {%for consulta6 in consulta6%}
     <div class="col">
-
       <span>FORMATO NO. </span> <input type="" value="{{consulta6.0}}" disabled>
     </div>
     <div class="col">
       <span>NOMBRE DEL BALANCE: </span><input type="text" value="{{consulta6.1}}" disabled>
     </div>
+   {%endfor%}
   </div>
 </div>
 
@@ -32,7 +33,7 @@
              <!--ESTE IF ES PARA LOS CONCEPTOS-->
             <tr >
               <th scope="col" style="text-align: left;">{{consulta.1}}</th>
-              <th scope="col" style="text-align: left;">{{consulta.0}}</th>
+              <th scope="col" style="text-align: left;">$ {{consulta.0}}</th>
               
             </tr>
             
@@ -65,7 +66,7 @@
               <!--ESTE IF ES PARA LOS CONCEPTOS-->
               <tr>
                 <th scope="col" style="text-align: left;">{{consulta3.1}}</th>
-                <th scope="col" style="text-align: left;">{{consulta3.0}}</th>
+                <th scope="col" style="text-align: left;">$ {{consulta3.0}}</th>
       
               </tr>
       
@@ -100,7 +101,7 @@
               <!--ESTE IF ES PARA LOS CONCEPTOS-->
               <tr>
                 <th scope="col" style="text-align: left;">{{consulta1.1}}</th>
-                <th scope="col" style="text-align: left;">{{consulta1.0}}</th>
+                <th scope="col" style="text-align: left;">$ {{consulta1.0}}</th>
       
               </tr>
       
@@ -134,7 +135,7 @@
                 <!--ESTE IF ES PARA LOS CONCEPTOS-->
                 <tr>
                   <th scope="col" style="text-align: left;">{{consulta4.1}}</th>
-                  <th scope="col" style="text-align: left;">{{consulta4.0}}</th>
+                  <th scope="col" style="text-align: left;">$ {{consulta4.0}}</th>
         
                 </tr>
         
@@ -172,7 +173,7 @@
               <!--ESTE IF ES PARA LOS CONCEPTOS-->
               <tr>
                 <th scope="col" style="text-align: left;">{{consulta2.1}}</th>
-                <th scope="col" style="text-align: left;">{{consulta2.0}}</th>
+                <th scope="col" style="text-align: left;">$ {{consulta2.0}}</th>
       
               </tr>
       
@@ -199,13 +200,12 @@
               </tr>
             </thead>
       
-      
             <tbody>
               {%for consulta5 in consulta5%}
               <!--ESTE IF ES PARA LOS CONCEPTOS-->
               <tr>
                 <th scope="col" style="text-align: left;">{{consulta5.1}}</th>
-                <th scope="col" style="text-align: left;">{{consulta5.0}}</th>
+                <th scope="col" style="text-align: left;">$ {{consulta5.0}}</th>
       
               </tr>
       
@@ -220,19 +220,6 @@
       
             </tbody>
           </table>
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="p-3">
-            <table class="table" id="miTabla">
-              <thead>
-                <tr>
-                  <th scope="col" colspan="4">TOTAL DE PASIVOS</th>
-                  <th scope="col">$ {{resultadoP}}</th>
-                </tr>
-              </thead>
-        
-            </table>
           </div>
         </div>
       </div>
@@ -250,15 +237,27 @@
           
               </table>
             </div>
-        
+            <div class="col-6">
+              <div class="p-3">
+                <table class="table" id="miTabla">
+                  <thead>
+                    <tr>
+                      <th scope="col" colspan="4">TOTAL DE PASIVOS + CAPITAL</th>
+                      <th scope="col">$ {{resultadoPasiCapi}}</th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+            </div>
           </div>
+          
 
           <div class="row g-3">
             <div class="col-6">
               <table class="table" id="miTabla">
                 <thead>
                   <tr>
-                    <th scope="col" colspan="4">ESTADO DE RESULTADO</th>
+                    <th scope="col" colspan="4">CAPITAL SOCIAL</th>
                     
                   </tr>
                 </thead>
@@ -267,30 +266,70 @@
                   <!--ESTE IF ES PARA LOS CONCEPTOS-->
                   <tr>
                     <th scope="col" style="text-align: left;">{{consulta7.1}}</th>
-                    <th scope="col" style="text-align: left;">{{consulta7.0}}</th>
+                    <th scope="col" style="text-align: left;"> $ {{consulta7.0}}</th>
                 
                   </tr>
                 
                   {%endfor%}
-                  {%for consulta8 in consulta8%}
-                  <!--ESTE IF ES PARA LOS CONCEPTOS-->
+
                   <tr>
-                    <th scope="col" style="text-align: left;">{{consulta8.1}}</th>
-                    <th scope="col" style="text-align: left;">{{consulta8.0}}</th>
+                    <th scope="col" style="text-align: left;">UTILIDAD DEL EJERCICIO</th>
+                    <th scope="col" style="text-align: left;">$ {{resultadoUE}}</th>
                   
                   </tr>
-                  
-                  {%endfor%}
-                  
-                
+
+                  <tr>
+                    <th scope="col" style="text-align: left;">TOTAL CAPITAL SOCIAL</th>
+                    <th scope="col" style="text-align: left;">$ {{resultadoCS}}</th>
+                  </tr>
                 </tbody>
               </table>
             </div>
 
+          <div class="col-6">
+            <div class="p-3">
+                <table class="table" id="miTabla">
+                  <thead>
+                    <tr>
+                      <th scope="col" colspan="4">ESTADO DE RESULTADO</th>
+            
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {%for consulta8 in consulta8%}
+                    <tr>
+                      <th scope="col" style="text-align: left;">{{consulta8.1}}</th>
+                      <th scope="col" style="text-align: left;">$ {{consulta8.0}}</th>
+            
+                    </tr>
+                    {%endfor%}
+                    {%for consulta9 in consulta9%}
+                    <tr>
+                      <th scope="col" style="text-align: left;">{{consulta9.1}}</th>
+                      <th scope="col" style="text-align: left;">$ {{consulta9.0}}</th>
+                    
+                    </tr>
+                    {%endfor%}
+                    <tr>
+                      <th scope="col" style="text-align: left;">UTILIDAD BRUTA</th>
+                      <th scope="col" style="text-align: left;">$ {{resultadoUB}}</th>
+                    </tr>
+                    {%for consulta10 in consulta10%}
+                    <tr>
+                      <th scope="col" style="text-align: left;">{{consulta10.1}}</th>
+                      <th scope="col" style="text-align: left;">$ {{consulta10.0}}</th>
+                    
+                    </tr>
+                    {%endfor%}
 
-
-          
-
-          
+                    <tr>
+                      <th scope="col" style="text-align: left;">UTILIDAD DEL EJERCICIO</th>
+                      <th scope="col" style="text-align: left;">$ {{resultadoUE}}</th>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>          
 </div>
 {% endblock %}

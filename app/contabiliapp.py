@@ -1374,10 +1374,46 @@ def vwSelectBalance(idFormato):
     cur7.execute('SELECT datos.monto, conceptos.tipoConcepto FROM datos JOIN conceptos ON datos.concepto_id = conceptos.id_concepto JOIN pasivoactivos ON conceptos.pasivoActivo_id = pasivoactivos.id_pasivoActivo WHERE pasivoactivos.id_pasivoActivo= 7 AND datos.formato_id LIKE %s',[idFormato])
     consulta7 = cur7.fetchall()
 
+    capital = mysql.connection.cursor()
+    capital.execute('SELECT SUM(datos.monto) FROM datos JOIN conceptos ON datos.concepto_id = conceptos.id_concepto JOIN pasivoactivos ON conceptos.pasivoActivo_id = pasivoactivos.id_pasivoActivo WHERE pasivoactivos.id_pasivoActivo= 7 AND datos.formato_id LIKE %s',[idFormato])
+    resultadoC= capital.fetchone()
+    sumaC = resultadoC [0]
+
+    venta = mysql.connection.cursor()
+    venta.execute('SELECT SUM(datos.monto) FROM datos JOIN conceptos ON datos.concepto_id = conceptos.id_concepto JOIN pasivoactivos ON conceptos.pasivoActivo_id = pasivoactivos.id_pasivoActivo WHERE pasivoactivos.id_pasivoActivo = 8 AND conceptos.id_concepto = 37 AND datos.formato_id = %s',[idFormato])
+    resultadoV= venta.fetchone()
+
+    CostoV = mysql.connection.cursor()
+    CostoV.execute('SELECT SUM(datos.monto) FROM datos JOIN conceptos ON datos.concepto_id = conceptos.id_concepto JOIN pasivoactivos ON conceptos.pasivoActivo_id = pasivoactivos.id_pasivoActivo WHERE pasivoactivos.id_pasivoActivo = 8 AND conceptos.id_concepto = 38 AND datos.formato_id = %s',[idFormato])
+    resultadoCV= CostoV.fetchone()
+
+    sumaCV= resultadoCV[0]
+    sumaV= resultadoV[0]
+
+    resultadoUB= sumaV - sumaCV 
+
+    GastosO = mysql.connection.cursor()
+    GastosO.execute('SELECT SUM(datos.monto) FROM datos JOIN conceptos ON datos.concepto_id = conceptos.id_concepto JOIN pasivoactivos ON conceptos.pasivoActivo_id = pasivoactivos.id_pasivoActivo WHERE pasivoactivos.id_pasivoActivo = 8 AND conceptos.id_concepto = 40 AND datos.formato_id = %s',[idFormato])
+    resultadoGO= GastosO.fetchone()
+
+    sumaGO= resultadoGO[0]
+
+    resultadoUE = resultadoUB + sumaGO    
+    resultadoCS = sumaC + resultadoUE
+
+    resultadoPasiCapi = resultadoP + resultadoCS
+
     cur8=mysql.connection.cursor()
-    cur8.execute('SELECT datos.monto, conceptos.tipoConcepto FROM datos JOIN conceptos ON datos.concepto_id = conceptos.id_concepto JOIN pasivoactivos ON conceptos.pasivoActivo_id = pasivoactivos.id_pasivoActivo WHERE pasivoactivos.id_pasivoActivo= 8 AND datos.formato_id LIKE %s',[idFormato])
+    cur8.execute('SELECT datos.monto, conceptos.tipoConcepto FROM datos JOIN conceptos ON datos.concepto_id = conceptos.id_concepto JOIN pasivoactivos ON conceptos.pasivoActivo_id = pasivoactivos.id_pasivoActivo WHERE pasivoactivos.id_pasivoActivo = 8 AND conceptos.id_concepto = 37 AND datos.formato_id = %s',[idFormato])
     consulta8 = cur8.fetchall()
-    
+
+    cur9=mysql.connection.cursor()
+    cur9.execute('SELECT datos.monto, conceptos.tipoConcepto FROM datos JOIN conceptos ON datos.concepto_id = conceptos.id_concepto JOIN pasivoactivos ON conceptos.pasivoActivo_id = pasivoactivos.id_pasivoActivo WHERE pasivoactivos.id_pasivoActivo = 8 AND conceptos.id_concepto = 38 AND datos.formato_id = %s',[idFormato])
+    consulta9 = cur9.fetchall()
+
+    cur10=mysql.connection.cursor()
+    cur10.execute('SELECT datos.monto, conceptos.tipoConcepto FROM datos JOIN conceptos ON datos.concepto_id = conceptos.id_concepto JOIN pasivoactivos ON conceptos.pasivoActivo_id = pasivoactivos.id_pasivoActivo WHERE pasivoactivos.id_pasivoActivo = 8 AND conceptos.id_concepto = 40 AND datos.formato_id = %s',[idFormato])
+    consulta10 = cur10.fetchall()
 
     cur6=mysql.connection.cursor()
     cur6.execute('SELECT * FROM formatos WHERE id_formato= %s',[idFormato])
@@ -1386,6 +1422,8 @@ def vwSelectBalance(idFormato):
     
     
     return render_template('vwInsertBalance.html',
+                           resultadoCS= resultadoCS, resultadoPasiCapi = resultadoPasiCapi,
+                           resultadoUB = resultadoUB, resultadoUE= resultadoUE,
                            resultadoA= resultadoA,resultadoP=resultadoP, 
                            resultadoAC= resultadoAC, resultadoAF= resultadoAF ,resultadoAD= resultadoAD,
                            resultadoPC= resultadoPC, resultadoPF= resultadoPF ,resultadoPD= resultadoPD,
@@ -1393,7 +1431,8 @@ def vwSelectBalance(idFormato):
                             consulta=consulta,consulta6=consulta6,
                             consulta1=consulta1,consulta3=consulta3, 
                             consulta4=consulta4, consulta5=consulta5,
-                            consulta2=consulta2, idFormato=idFormato)
+                            consulta2=consulta2,consulta10= consulta10, 
+                            consulta9 = consulta9, idFormato=idFormato)
 
 
 
