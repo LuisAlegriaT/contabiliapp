@@ -1434,6 +1434,15 @@ def vwSelectBalance(idFormato):
                             consulta2=consulta2,consulta10= consulta10, 
                             consulta9 = consulta9, idFormato=idFormato)
 
+@app.route('/vw_myBalance')
+def vwMyBalance():
+    cur=mysql.connection.cursor()
+    cur.execute('SELECT * FROM formatos')
+    formato = cur.fetchall()
+    
+    return render_template('vwMyBalance.html',formato= formato)
+
+
 
 
 
