@@ -1398,7 +1398,7 @@ def vwSelectBalance(idFormato):
 
     sumaGO= resultadoGO[0]
 
-    resultadoUE = resultadoUB + sumaGO    
+    resultadoUE = resultadoUB - sumaGO    
     resultadoCS = sumaC + resultadoUE
 
     resultadoPasiCapi = resultadoP + resultadoCS
