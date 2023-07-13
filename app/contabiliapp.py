@@ -95,7 +95,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.") 
     if sumaAbonoBanco is not None and sumaCargoBanco is not None:
-        totalBancos=sumaAbonoBanco-sumaCargoBanco #RESTA DE ABONO Y CARGO
+        totalBancos=sumaCargoBanco-sumaAbonoBanco #RESTA DE ABONO Y CARGO
 
     else:
         print("Uno o ambos valores son None.")
@@ -123,7 +123,7 @@ def vwEsquemaT(idFormato):
         print("No se encontraron resultados.")
 
     if sumaAbonoCajas is not None and sumaCargoCajas is not None:
-        totalCajas = sumaAbonoCajas - sumaCargoCajas
+        totalCajas = sumaCargoCajas-sumaAbonoCajas
     else:
         print("Uno o ambos valores son None.")
 
@@ -148,7 +148,7 @@ def vwEsquemaT(idFormato):
         print("No se encontraron resultados.")
 
     if sumaAbonoInversiones is not None and sumaCargoInversiones is not None:
-        totalInversiones=sumaAbonoInversiones-sumaCargoInversiones
+        totalInversiones=sumaCargoInversiones-sumaAbonoInversiones
     else:
         print("Uno o ambos valores son None.")
 
@@ -175,7 +175,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.") 
     if sumaAbonoAlmacenes is not None and sumaCargoAlmacenes is not None:
-        totalAlmacenes =sumaAbonoAlmacenes -sumaCargoAlmacenes
+        totalAlmacenes = sumaCargoAlmacenes -sumaAbonoAlmacenes
     else:
         print("Uno o ambos valores son None.")
      
@@ -200,7 +200,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.") 
     if sumaAbonoClientes is not None and sumaCargoClientes is not None:
-        totalClientes =sumaAbonoClientes -sumaCargoClientes
+        totalClientes =sumaCargoClientes- sumaAbonoClientes
     else:
         print("Uno o ambos valores son None.")
      
@@ -225,7 +225,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.") 
     if sumaAbonoDocumentosC is not None and sumaCargoDocumentosC is not None:
-        totalDocumentosC=sumaAbonoDocumentosC-sumaCargoDocumentosC
+        totalDocumentosC=sumaCargoDocumentosC - sumaAbonoDocumentosC
     else:
         print("Uno o ambos valores son None.")
     
@@ -250,7 +250,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.") 
     if sumaAbonoDeudoresD is not None and sumaCargoDeudoresD is not None:
-        totalDeudoresD=sumaAbonoDeudoresD-sumaCargoDeudoresD
+        totalDeudoresD=sumaCargoDeudoresD-sumaAbonoDeudoresD
     else:
         print("Uno o ambos valores son None.")
    
@@ -275,7 +275,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.") 
     if sumaAbonoAnticipoP is not None and sumaCargoAnticipoP is not None:
-        totalAnticipoP=sumaAbonoAnticipoP-sumaCargoAnticipoP
+        totalAnticipoP=sumaCargoAnticipoP- sumaAbonoAnticipoP
     else:
         print("Uno o ambos valores son None.")
     
@@ -300,7 +300,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.") 
     if sumaAbonoTerreno is not None and sumaCargoTerreno is not None:
-        totalTerreno=sumaAbonoTerreno-sumaCargoTerreno
+        totalTerreno=sumaCargoTerreno-sumaAbonoTerreno
     else:
         print("Uno o ambos valores son None.")
     
@@ -325,7 +325,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.") 
     if sumaAbonoEdificios is not None and sumaCargoEdificios is not None:
-        totalEdificios=sumaAbonoEdificios-sumaCargoEdificios
+        totalEdificios=sumaCargoEdificios-sumaAbonoEdificios
     else:
         print("Uno o ambos valores son None.")
     
@@ -350,7 +350,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.") 
     if sumaAbonoMobiliarios is not None and sumaCargoMobiliarios is not None:
-        totalMobiliarios=sumaAbonoMobiliarios-sumaCargoMobiliarios
+        totalMobiliarios=sumaCargoMobiliarios-sumaAbonoMobiliarios
     else:
         print("Uno o ambos valores son None.")
    
@@ -374,7 +374,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.") 
     if sumaAbonoEquipoC is not None and sumaCargoEquipoC is not None:
-        totalEquipoC=sumaAbonoEquipoC-sumaCargoEquipoC
+        totalEquipoC=sumaCargoEquipoC-sumaAbonoEquipoC
     else:
         print("Uno o ambos valores son None.")
 
@@ -398,7 +398,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.")
     if sumaAbonoEquipoE is not None and sumaCargoEquipoE is not None:
-        totalEquipoE=sumaAbonoEquipoE-sumaCargoEquipoE
+        totalEquipoE=sumaCargoEquipoE-sumaAbonoEquipoE
     else:
         print("Uno o ambos valores son None.")
 
@@ -423,7 +423,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.") 
     if sumaAbonoDepositoG is not None and sumaCargoDepositoG is not None:
-        totalDepositoG =sumaAbonoDepositoG -sumaCargoDepositoG
+        totalDepositoG =sumaCargoDepositoG-sumaAbonoDepositoG
     else:
         print("Uno o ambos valores son None.")
 
@@ -447,7 +447,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.") 
     if sumaAbonoInversionP is not None and sumaCargoInversionP is not None:
-        totalInversionP =sumaAbonoInversionP -sumaCargoInversionP
+        totalInversionP =sumaCargoInversionP-sumaAbonoInversionP
     else:
         print("Uno o ambos valores son None.")
 
@@ -471,7 +471,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.") 
     if sumaAbonoGastosI is not None and sumaCargoGastosI is not None:  
-        totalGastosI=sumaAbonoGastosI-sumaCargoGastosI
+        totalGastosI=sumaCargoGastosI-sumaAbonoGastosI
     else:
         print("Uno o ambos valores son None.")
 
@@ -495,7 +495,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.") 
     if sumaAbonoGastosE is not None and sumaCargoGastosE is not None:  
-        totalGastosE=sumaAbonoGastosE-sumaCargoGastosE
+        totalGastosE=sumaCargoGastosE-sumaAbonoGastosE
     else:
         print("Uno o ambos valores son None.")
 
@@ -519,7 +519,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.") 
     if sumaAbonoGastosM is not None and sumaCargoGastosM is not None:
-        totalGastosM=sumaAbonoGastosM-sumaCargoGastosM
+        totalGastosM=sumaCargoGastosM-sumaAbonoGastosM
     else:
         print("Uno o ambos valores son None.")
 
@@ -543,7 +543,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.") 
     if sumaAbonoGastosO is not None and sumaCargoGastosO is not None: 
-        totalGastosO=sumaAbonoGastosO-sumaCargoGastosO
+        totalGastosO=sumaCargoGastosO-sumaAbonoGastosO
     else:
         print("Uno o ambos valores son None.")
 
@@ -568,7 +568,7 @@ def vwEsquemaT(idFormato):
         print("No se encontraron resultados.") 
     if sumaAbonoGastosIn is not None and sumaCargoGastosIn is not None:
         
-        totalGastosIn=sumaAbonoGastosIn-sumaCargoGastosIn
+        totalGastosIn=sumaCargoGastosIn-sumaAbonoGastosIn
     else:
         print("Uno o ambos valores son None.")
 
@@ -593,7 +593,7 @@ def vwEsquemaT(idFormato):
         print("No se encontraron resultados.") 
     if sumaAbonoPapeleria is not None and sumaCargoPapeleria is not None:
 
-        totalPapeleria=sumaAbonoPapeleria-sumaCargoPapeleria
+        totalPapeleria=sumaCargoPapeleria-sumaAbonoPapeleria
     else:
         print("Uno o ambos valores son None.")
 
@@ -617,7 +617,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.")
     if sumaAbonoPropaganda is not None and sumaCargoPropaganda is not None:
-        totalPropaganda=sumaAbonoPropaganda-sumaCargoPropaganda   
+        totalPropaganda=sumaCargoPropaganda-sumaAbonoPropaganda   
     else:
         print("Uno o ambos valores son None.")
 
@@ -641,7 +641,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.") 
     if sumaAbonoPrimasS is not None and sumaCargoPrimasS is not None:
-        totalPrimasS =sumaAbonoPrimasS -sumaCargoPrimasS 
+        totalPrimasS =sumaCargoPrimasS-sumaAbonoPrimasS 
     else:
         print("Uno o ambos valores son None.")
 
@@ -665,7 +665,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.") 
     if sumaAbonoRentasP is not None and sumaCargoRentasP is not None:
-        totalRentasP =sumaAbonoRentasP -sumaCargoRentasP
+        totalRentasP =sumaCargoRentasP-sumaAbonoRentasP
     else:
         print("Uno o ambos valores son None.") 
 
@@ -689,7 +689,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.") 
     if sumaAbonoInteresesP is not None and sumaCargoInteresesP is not None:
-        totalInteresesP=sumaAbonoInteresesP-sumaCargoInteresesP
+        totalInteresesP=sumaCargoInteresesP-sumaAbonoInteresesP
     else:
         print("Uno o ambos valores son None.")
 
@@ -713,7 +713,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.") 
     if sumaAbonoProveedores is not None and sumaCargoProveedores is not None:
-        totalProveedores =sumaAbonoProveedores -sumaCargoProveedores 
+        totalProveedores = sumaAbonoProveedores-sumaCargoProveedores 
     else:
         print("Uno o ambos valores son None.")
 
@@ -737,7 +737,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.") 
     if sumaAbonoDocumentosP is not None and sumaCargoDocumentosP is not None:
-        totalDocumentosP=sumaAbonoDocumentosP-sumaCargoDocumentosP
+        totalDocumentosP=sumaCargoDocumentosP-sumaAbonoDocumentosP
     else:
         print("Uno o ambos valores son None.")
 
@@ -785,7 +785,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.") 
     if sumaAbonoAnticipoC is not None and sumaCargoAnticipoC is not None:
-        totalAnticipoC=sumaAbonoAnticipoC-sumaCargoAnticipoC
+        totalAnticipoC=sumaCargoAnticipoC-sumaAbonoAnticipoC
     else:
         print("Uno o ambos valores son None.")
 
@@ -809,7 +809,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.") 
     if sumaAbonoGastosP is not None and sumaCargoGastosP is not None:
-        totalGastosP=sumaAbonoGastosP-sumaCargoGastosP
+        totalGastosP=sumaCargoGastosP-sumaAbonoGastosP
     else:
         print("Uno o ambos valores son None.")
 
@@ -833,7 +833,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.") 
     if sumaAbonoImpuestosP is not None and sumaCargoImpuestosP is not None:
-        totalImpuestosP=sumaAbonoImpuestosP-sumaCargoImpuestosP
+        totalImpuestosP=sumaCargoImpuestosP-sumaAbonoImpuestosP
     else:
         print("Uno o ambos valores son None.")
     
@@ -858,7 +858,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.") 
     if sumaAbonoHipotecas is not None and sumaCargoHipotecas is not None:
-        totalHipotecas=sumaAbonoHipotecas-sumaCargoHipotecas
+        totalHipotecas=sumaCargoHipotecas-sumaAbonoHipotecas
     else:
         print("Uno o ambos valores son None.")
 
@@ -882,7 +882,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.") 
     if sumaAbonoDocumentosPL is not None and sumaCargoDocumentosPL is not None:
-        totalDocumentosPL=sumaAbonoDocumentosPL-sumaCargoDocumentosPL
+        totalDocumentosPL=sumaCargoDocumentosPL-sumaAbonoDocumentosPL
     else:
         print("Uno o ambos valores son None.")
     
@@ -907,7 +907,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.") 
     if sumaAbonoCuentasPL is not None and sumaCargoCuentasPL is not None:
-        totalCuentasPL=sumaAbonoCuentasPL-sumaCargoCuentasPL
+        totalCuentasPL=sumaCargoCuentasPL-sumaAbonoCuentasPL
     else:
         print("Uno o ambos valores son None.")
 
@@ -931,7 +931,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.") 
     if sumaAbonoRentasC is not None and sumaCargoRentasC is not None:
-        totalRentasC=sumaAbonoRentasC - sumaCargoRentasC
+        totalRentasC=sumaCargoRentasC-sumaAbonoRentasC
     else:
         print("Uno o ambos valores son None.")
 
@@ -955,7 +955,7 @@ def vwEsquemaT(idFormato):
     else:
         print("No se encontraron resultados.") 
     if sumaAbonoInteresesC is not None and sumaCargoInteresesC is not None:
-        totalInteresesC=sumaAbonoInteresesC - sumaCargoInteresesC
+        totalInteresesC=sumaCargoInteresesC-sumaAbonoInteresesC
     else:
         print("Uno o ambos valores son None.")
 
